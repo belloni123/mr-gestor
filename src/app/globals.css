@@ -189,6 +189,101 @@ a {
   display: none;
 }
 
+.floating-panel,
+.mobile-menu-panel {
+  position: fixed;
+  z-index: 90;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(20px);
+}
+
+.floating-panel {
+  top: 52px;
+  right: 24px;
+  width: min(360px, calc(100vw - 32px));
+  padding: 14px;
+}
+
+.panel-heading.compact {
+  margin-bottom: 10px;
+}
+
+.search-field {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-height: 42px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  padding: 0 12px;
+  background: var(--canvas-soft);
+  color: var(--muted);
+}
+
+.search-field input {
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.quick-links,
+.notification-stack,
+.mobile-menu-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.quick-links {
+  margin-top: 12px;
+}
+
+.quick-links a,
+.notification-stack a,
+.mobile-menu-grid a,
+.mobile-menu-grid button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  padding: 0 12px;
+  color: var(--ink);
+  background: var(--canvas);
+  font-size: 13px;
+}
+
+.notification-stack a {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  min-height: 58px;
+}
+
+.notification-stack span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.mobile-menu-panel {
+  top: 52px;
+  right: 16px;
+  left: 16px;
+  padding: 12px;
+}
+
+.mobile-menu-grid button {
+  cursor: pointer;
+}
+
 .sub-nav {
   position: sticky;
   top: 44px;
@@ -388,6 +483,14 @@ a {
   line-height: 1.35;
 }
 
+.hero-copy .sync-status-note {
+  max-width: 680px;
+  border-left: 3px solid var(--blue-on-dark);
+  padding-left: 12px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 14px;
+}
+
 .hero-metrics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -417,6 +520,69 @@ a {
   font-size: 24px;
   font-weight: 600;
   line-height: 1;
+}
+
+.help-center {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+  gap: 12px;
+  align-items: stretch;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  background: var(--canvas);
+}
+
+.help-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  min-width: 0;
+}
+
+.help-intro h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.help-intro p,
+.help-card p {
+  margin: 0;
+  color: var(--muted-strong);
+  line-height: 1.48;
+}
+
+.help-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.help-card {
+  display: grid;
+  gap: 10px;
+  min-height: 148px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  padding: 14px;
+  background: var(--canvas-soft);
+}
+
+.help-card svg {
+  color: var(--blue);
+}
+
+.help-card strong {
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.help-card p {
+  font-size: 13px;
 }
 
 .company-filter-bar {
@@ -1019,6 +1185,10 @@ td:nth-child(5) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .help-center {
+    grid-template-columns: 1fr;
+  }
+
   .analytics-grid,
   .tables-grid {
     grid-template-columns: 1fr;
@@ -1127,6 +1297,17 @@ td:nth-child(5) {
   .company-chips {
     width: 100%;
   }
+
+  .help-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .floating-panel {
+    top: 52px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
 }
 
 @media (max-width: 520px) {
@@ -1157,6 +1338,10 @@ td:nth-child(5) {
     font-size: 34px;
   }
 
+  .help-intro h2 {
+    font-size: 24px;
+  }
+
   .hero-metrics,
   .kpi-grid,
   .view-tabs {
@@ -1174,6 +1359,7 @@ td:nth-child(5) {
   .chart-card,
   .comparison-card,
   .table-card,
+  .help-center,
   .company-context,
   .sync-card,
   .alerts-card {

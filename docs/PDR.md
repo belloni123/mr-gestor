@@ -76,6 +76,8 @@ Perfil futuro recomendado:
 - Evitar que editores recebam dados de empresas nao autorizadas no HTML/JSON.
 - Fazer deploy via Docker no Coolify.
 - Manter README, checklist de seguranca, RBAC e deploy atualizados.
+- Atualizar a Central de Ajuda a cada nova funcionalidade, inteligencia,
+  integracao, automacao, regra de acesso ou mudanca operacional relevante.
 
 ## Entregue nesta versao
 
@@ -123,6 +125,8 @@ Fase 3 - Operacao segura:
 - Usuario sem sessao sempre redireciona para `/login`.
 - Login valido sempre exige MFA antes do dashboard.
 - Primeiro acesso exige configuracao de 2FA.
+- Dashboard mostra uma Central de Ajuda com orientacoes de primeiro acesso e
+  status das integracoes.
 - Usuario com `mustChangePassword` e redirecionado para troca de senha.
 - Editor nao recebe dados de empresas fora do vinculo.
 - Super admin consegue criar usuario e alterar empresas permitidas.

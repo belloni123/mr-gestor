@@ -18,18 +18,23 @@ import {
 import {
   ArrowUpRight,
   Bell,
+  BookOpen,
   Building2,
   CalendarDays,
   Check,
+  CheckCircle2,
   ChevronDown,
   CircleDollarSign,
+  ClipboardList,
   DatabaseZap,
   FileChartColumnIncreasing,
   Filter,
+  Info,
   LayoutDashboard,
   LogOut,
   LockKeyhole,
   Menu,
+  Megaphone,
   PieChart as PieChartIcon,
   RefreshCcw,
   Search,
@@ -46,20 +51,34 @@ import type { Alert, DashboardCompany, FinancialItem } from "@/lib/dashboard-typ
 
 type Company = DashboardCompany;
 type DashboardView = "executivo" | "controladoria" | "receber" | "pagar";
+type ModuleItem = {
+  label: string;
+  icon: typeof LayoutDashboard;
+  href: string;
+};
 
 type MrGestorAppProps = {
   companies: Company[];
   user: AuthSessionUser;
 };
 
-const moduleItems = [
-  { label: "Dashboards", icon: LayoutDashboard },
-  { label: "Controladoria", icon: FileChartColumnIncreasing },
-  { label: "Empresas", icon: Building2 },
-  { label: "Clientes", icon: Users },
-  { label: "Integracoes", icon: DatabaseZap },
-  { label: "Governanca", icon: ShieldCheck },
-  { label: "Acessos", icon: LockKeyhole },
+const navLinks = [
+  { label: "Dashboards", href: "#dashboards" },
+  { label: "Ajuda", href: "#ajuda" },
+  { label: "Controladoria", href: "#controladoria" },
+  { label: "Empresas", href: "#empresas" },
+  { label: "Integracoes", href: "#integracoes" },
+];
+
+const moduleItems: ModuleItem[] = [
+  { label: "Dashboards", icon: LayoutDashboard, href: "#dashboards" },
+  { label: "Ajuda", icon: BookOpen, href: "#ajuda" },
+  { label: "Controladoria", icon: FileChartColumnIncreasing, href: "#controladoria" },
+  { label: "Empresas", icon: Building2, href: "#empresas" },
+  { label: "Clientes", icon: Users, href: "#clientes" },
+  { label: "Integracoes", icon: DatabaseZap, href: "#integracoes" },
+  { label: "Governanca", icon: ShieldCheck, href: "#governanca" },
+  { label: "Acessos", icon: LockKeyhole, href: "#acessos" },
 ];
 
 const views: { id: DashboardView; label: string; icon: typeof LayoutDashboard }[] = [
@@ -70,6 +89,29 @@ const views: { id: DashboardView; label: string; icon: typeof LayoutDashboard }[
 ];
 
 const pieColors = ["#0066cc", "#1d1d1f", "#7a7a7a", "#2997ff", "#cccccc"];
+
+const helpCards = [
+  {
+    title: "Primeiro acesso",
+    text: "Ative o 2FA, troque a senha temporaria e confira se o seu usuario esta nas empresas corretas.",
+    icon: CheckCircle2,
+  },
+  {
+    title: "Leitura dos dados",
+    text: "Use os chips de empresa para ver uma empresa isolada ou consolidar varias empresas no mesmo dashboard.",
+    icon: ClipboardList,
+  },
+  {
+    title: "Status das integracoes",
+    text: "Esta versao ja esta pronta para apresentacao segura, mas Asaas e Conta Azul ainda estao em modo demonstrativo.",
+    icon: Info,
+  },
+  {
+    title: "Novidades do MR Gestor",
+    text: "Toda nova inteligencia, tela ou automacao deve ser registrada aqui antes de ser apresentada ao cliente.",
+    icon: Megaphone,
+  },
+];
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -135,6 +177,10 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
   const [selectedIds, setSelectedIds] = useState<string[]>(companies.map((company) => company.id));
   const [view, setView] = useState<DashboardView>("executivo");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [syncNotice, setSyncNotice] = useState("Dados demonstrativos carregados para apresentacao.");
 
   const selectedCompanies = useMemo(() => {
     const filtered = companies.filter((company) => selectedIds.includes(company.id));
@@ -203,6 +249,27 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
     setSelectedIds([companyId]);
   }
 
+  function closeFloatingPanels() {
+    setMobileMenuOpen(false);
+    setSearchOpen(false);
+    setNotificationsOpen(false);
+  }
+
+  function handleSectionClick() {
+    closeFloatingPanels();
+  }
+
+  function openFilters() {
+    setFiltersOpen(true);
+    closeFloatingPanels();
+  }
+
+  function showSyncStatus() {
+    setSyncNotice(
+      "Sincronizacao real ainda depende das credenciais Asaas e Conta Azul. O painel atual usa dados demonstrativos seguros.",
+    );
+  }
+
   async function logout() {
     await fetch("/api/auth/logout", {
       method: "POST",
@@ -223,10 +290,11 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             MR Gestor
           </a>
           <nav className="global-links" aria-label="Navegacao principal">
-            <a href="#dashboards">Dashboards</a>
-            <a href="#controladoria">Controladoria</a>
-            <a href="#empresas">Empresas</a>
-            <a href="#integracoes">Integracoes</a>
+            {navLinks.map((item) => (
+              <a href={item.href} key={item.href}>
+                {item.label}
+              </a>
+            ))}
           </nav>
           <div className="nav-actions">
             <div className="account-pill">
@@ -241,20 +309,112 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             <a className="icon-button" href="/account/security" aria-label="Seguranca da conta" title="Seguranca da conta">
               <Settings size={17} />
             </a>
-            <button className="icon-button" aria-label="Buscar">
+            <button
+              className="icon-button"
+              onClick={() => {
+                setSearchOpen((current) => !current);
+                setNotificationsOpen(false);
+                setMobileMenuOpen(false);
+              }}
+              type="button"
+              aria-label="Buscar"
+              aria-expanded={searchOpen}
+              title="Buscar"
+            >
               <Search size={17} />
             </button>
-            <button className="icon-button" aria-label="Notificacoes">
+            <button
+              className="icon-button"
+              onClick={() => {
+                setNotificationsOpen((current) => !current);
+                setSearchOpen(false);
+                setMobileMenuOpen(false);
+              }}
+              type="button"
+              aria-label="Notificacoes"
+              aria-expanded={notificationsOpen}
+              title="Notificacoes"
+            >
               <Bell size={17} />
             </button>
             <button className="icon-button" onClick={logout} type="button" aria-label="Sair" title="Sair">
               <LogOut size={17} />
             </button>
-            <button className="menu-button" aria-label="Abrir menu">
+            <button
+              className="menu-button"
+              onClick={() => {
+                setMobileMenuOpen((current) => !current);
+                setSearchOpen(false);
+                setNotificationsOpen(false);
+              }}
+              type="button"
+              aria-label="Abrir menu"
+              aria-expanded={mobileMenuOpen}
+            >
               <Menu size={18} />
             </button>
           </div>
         </div>
+        {searchOpen ? (
+          <div className="floating-panel search-panel" role="dialog" aria-label="Busca rapida">
+            <div className="panel-heading compact">
+              <span>Busca rapida</span>
+              <button className="icon-button light" onClick={() => setSearchOpen(false)} type="button" aria-label="Fechar busca">
+                <X size={16} />
+              </button>
+            </div>
+            <label className="search-field">
+              <Search size={16} />
+              <input placeholder="Buscar modulos, empresas e ajuda" />
+            </label>
+            <div className="quick-links">
+              {[...navLinks, { label: "Seguranca", href: "/account/security" }].map((item) => (
+                <a href={item.href} key={item.href} onClick={handleSectionClick}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : null}
+        {notificationsOpen ? (
+          <div className="floating-panel notifications-panel" role="dialog" aria-label="Notificacoes">
+            <div className="panel-heading compact">
+              <span>Notificacoes</span>
+              <button
+                className="icon-button light"
+                onClick={() => setNotificationsOpen(false)}
+                type="button"
+                aria-label="Fechar notificacoes"
+              >
+                <X size={16} />
+              </button>
+            </div>
+            <div className="notification-stack">
+              {alerts.slice(0, 4).map((alert) => (
+                <a href="#notificacoes" key={`${alert.company}-${alert.title}`} onClick={handleSectionClick}>
+                  <strong>{alert.title}</strong>
+                  <span>{alert.company}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : null}
+        {mobileMenuOpen ? (
+          <div className="mobile-menu-panel" role="dialog" aria-label="Menu principal">
+            <div className="mobile-menu-grid">
+              {navLinks.map((item) => (
+                <a href={item.href} key={item.href} onClick={handleSectionClick}>
+                  {item.label}
+                </a>
+              ))}
+              {user.role === "SUPER_ADMIN" ? <a href="/admin/users">Usuarios</a> : null}
+              <a href="/account/security">Seguranca</a>
+              <button onClick={logout} type="button">
+                Sair
+              </button>
+            </div>
+          </div>
+        ) : null}
       </header>
 
       <div className="sub-nav" id="top">
@@ -264,15 +424,15 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             <strong>{selectedLabel}</strong>
           </div>
           <div className="sub-nav-actions">
-            <button className="filter-trigger" onClick={() => setFiltersOpen(true)} type="button">
+            <button className="filter-trigger" onClick={openFilters} type="button">
               <Filter size={16} />
               Filtros
             </button>
-            <div className="period-pill">
+            <button className="period-pill" onClick={openFilters} type="button" aria-label="Alterar periodo">
               Jul 2026
               <ChevronDown size={15} />
-            </div>
-            <button className="primary-pill" type="button">
+            </button>
+            <button className="primary-pill" onClick={showSyncStatus} type="button" aria-describedby="sync-status">
               <RefreshCcw size={15} />
               Sincronizar
             </button>
@@ -285,10 +445,10 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           {moduleItems.map((item) => {
             const Icon = item.icon;
             return (
-              <button className="rail-item" key={item.label} type="button" title={item.label}>
+              <a className="rail-item" href={item.href} key={item.label} title={item.label}>
                 <Icon size={19} />
                 <span>{item.label}</span>
-              </button>
+              </a>
             );
           })}
         </aside>
@@ -301,11 +461,42 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
               <p>
                 {selectedCompanies.length} empresa{selectedCompanies.length > 1 ? "s" : ""} em contexto.
               </p>
+              <p className="sync-status-note" id="sync-status" aria-live="polite">
+                {syncNotice}
+              </p>
             </div>
             <div className="hero-metrics">
               <MetricMini label="Receita" value={toCompactBrl(totals.receita)} />
               <MetricMini label="Resultado" value={toCompactBrl(totals.resultado)} />
               <MetricMini label="Inadimplencia" value={toPercent(totals.inadimplencia)} />
+            </div>
+          </section>
+
+          <section className="help-center" id="ajuda" aria-labelledby="help-title">
+            <div className="help-intro">
+              <span className="eyebrow">Central de Ajuda</span>
+              <h2 id="help-title">Comece por aqui</h2>
+              <p>
+                Orientacoes essenciais para usar o portal, entender o status dos dados e acompanhar as novidades do MR Gestor.
+              </p>
+            </div>
+            <div className="help-card-grid">
+              {helpCards.map((card) => {
+                const Icon = card.icon;
+                const cardId =
+                  card.title === "Primeiro acesso"
+                    ? "acessos"
+                    : card.title === "Novidades do MR Gestor"
+                      ? "governanca"
+                      : undefined;
+                return (
+                  <article className="help-card" id={cardId} key={card.title}>
+                    <Icon size={18} />
+                    <strong>{card.title}</strong>
+                    <p>{card.text}</p>
+                  </article>
+                );
+              })}
             </div>
           </section>
 
@@ -454,7 +645,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             </div>
           </section>
 
-          <section className="tables-grid">
+          <section className="tables-grid" id="clientes">
             <FinancialTable title="Contas a receber" items={receivables} emptyLabel="Sem contas a receber" />
             <FinancialTable title="Contas a pagar" items={payables} emptyLabel="Sem contas a pagar" />
           </section>
@@ -464,7 +655,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           <section className="company-context">
             <div className="panel-heading">
               <span>Contexto</span>
-              <button className="icon-button light" type="button" aria-label="Abrir configuracoes">
+              <button className="icon-button light" onClick={openFilters} type="button" aria-label="Abrir filtros de contexto" title="Abrir filtros">
                 <ArrowUpRight size={15} />
               </button>
             </div>
@@ -505,7 +696,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             ))}
           </section>
 
-          <section className="alerts-card">
+          <section className="alerts-card" id="notificacoes">
             <div className="panel-heading">
               <span>Alertas</span>
               <CalendarDays size={16} />

@@ -27,6 +27,7 @@ O projeto foi preparado para operar como portal sigiloso: login obrigatorio, sen
 Detalhes em [docs/RBAC.md](docs/RBAC.md).
 
 O PDR do produto, benchmark e roadmap estao em [docs/PDR.md](docs/PDR.md).
+As regras de manutencao da Central de Ajuda estao em [docs/HELP_CENTER.md](docs/HELP_CENTER.md).
 
 ## Desenvolvimento local
 
@@ -78,6 +79,7 @@ Documentacao:
 - [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 - [docs/RBAC.md](docs/RBAC.md)
 - [docs/PDR.md](docs/PDR.md)
+- [docs/HELP_CENTER.md](docs/HELP_CENTER.md)
 
 Referencias usadas:
 
