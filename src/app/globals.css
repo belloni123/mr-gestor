@@ -131,6 +131,29 @@ a {
   gap: 8px;
 }
 
+.account-pill {
+  display: inline-flex;
+  align-items: flex-end;
+  flex-direction: column;
+  min-width: 132px;
+  color: #f5f5f7;
+  line-height: 1.1;
+}
+
+.account-pill span {
+  color: #86868b;
+  font-size: 11px;
+}
+
+.account-pill strong {
+  max-width: 180px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .icon-button,
 .menu-button {
   display: inline-flex;
@@ -1188,5 +1211,368 @@ td:nth-child(5) {
 
   .company-filter-bar .chip-check {
     flex: 0 0 22px;
+  }
+}
+
+.auth-page,
+.settings-page {
+  min-height: 100vh;
+  background: #f5f5f7;
+  color: var(--ink);
+}
+
+.auth-page {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.auth-card,
+.settings-card {
+  width: min(100%, 430px);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  background: var(--canvas);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.08);
+}
+
+.auth-card {
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+}
+
+.auth-card-wide {
+  width: min(100%, 560px);
+}
+
+.auth-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  color: #ffffff;
+  background: var(--blue);
+}
+
+.auth-heading,
+.settings-heading {
+  display: grid;
+  gap: 7px;
+}
+
+.auth-heading span,
+.settings-heading span,
+.settings-summary > span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.auth-heading h1,
+.settings-heading h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.05;
+}
+
+.settings-heading h2,
+.settings-summary h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.auth-heading p,
+.settings-heading p,
+.settings-summary p {
+  margin: 0;
+  color: var(--muted-strong);
+  line-height: 1.5;
+}
+
+.auth-card label,
+.settings-card label,
+.inline-admin-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted-strong);
+  font-size: 13px;
+}
+
+.auth-card input,
+.settings-card input,
+.settings-card select,
+.inline-admin-form input {
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: var(--ink);
+  background: var(--canvas-soft);
+  font: inherit;
+}
+
+.auth-submit,
+.secondary-action,
+.danger-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0 18px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.auth-submit {
+  width: 100%;
+  color: #ffffff;
+  background: var(--blue);
+}
+
+.secondary-action {
+  color: var(--ink);
+  background: var(--canvas-soft);
+}
+
+.danger-action {
+  color: #9f1239;
+  background: #fff1f2;
+}
+
+.auth-submit:disabled,
+.secondary-action:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.form-error,
+.form-success {
+  margin: 0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.form-error {
+  color: #9f1239;
+  background: #fff1f2;
+}
+
+.form-success {
+  color: #166534;
+  background: #f0fdf4;
+}
+
+.auth-loading,
+.security-notice {
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--muted-strong);
+  background: var(--canvas-soft);
+}
+
+.mfa-enrollment {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.mfa-enrollment img {
+  width: 220px;
+  height: 220px;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+}
+
+.mfa-enrollment div {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mfa-enrollment code {
+  overflow-wrap: anywhere;
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--ink);
+  background: var(--canvas-soft);
+}
+
+.settings-page {
+  padding: 24px;
+}
+
+.settings-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 18px;
+  width: min(100%, 980px);
+  margin: 0 auto;
+}
+
+.admin-shell {
+  width: min(100%, 1160px);
+}
+
+.settings-topbar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+}
+
+.settings-topbar a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.settings-card {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  padding: 22px;
+}
+
+.settings-summary {
+  align-self: start;
+}
+
+.permission-list,
+.admin-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.permission-list span,
+.admin-badges span {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  padding: 7px 10px;
+  color: var(--muted-strong);
+  background: var(--canvas-soft);
+  font-size: 12px;
+}
+
+.admin-form {
+  grid-column: 1 / -1;
+}
+
+.checkbox-stack {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  margin: 0;
+  padding: 12px;
+}
+
+.checkbox-stack legend {
+  padding: 0 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.checkbox-stack label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-stack input {
+  width: 16px;
+  height: 16px;
+  min-height: 16px;
+}
+
+.checkbox-stack.compact {
+  border: 0;
+  padding: 0;
+}
+
+.user-list-card {
+  grid-column: 1 / -1;
+}
+
+.admin-user-list {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-user-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(240px, 1fr) minmax(220px, 0.8fr) auto;
+  gap: 14px;
+  align-items: start;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--canvas-soft);
+}
+
+.admin-user-main {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-user-main div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-user-main span {
+  color: var(--muted-strong);
+  font-size: 13px;
+}
+
+.inline-admin-form {
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .settings-shell,
+  .admin-user-row {
+    grid-template-columns: 1fr;
+  }
+
+  .account-pill {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .auth-page,
+  .settings-page {
+    padding: 12px;
+  }
+
+  .auth-card,
+  .settings-card {
+    padding: 18px;
+  }
+
+  .auth-heading h1,
+  .settings-heading h1 {
+    font-size: 28px;
+  }
+
+  .mfa-enrollment {
+    grid-template-columns: 1fr;
+  }
+
+  .mfa-enrollment img {
+    width: 100%;
+    height: auto;
   }
 }
