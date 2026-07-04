@@ -1172,3 +1172,21 @@ td:nth-child(5) {
     padding: 10px 8px;
   }
 }
+
+@media (max-width: 520px) {
+  .company-filter-bar .company-chips {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: visible;
+  }
+
+  .company-filter-bar .company-chip {
+    justify-content: flex-start;
+    width: 100%;
+    white-space: normal;
+  }
+
+  .company-filter-bar .chip-check {
+    flex: 0 0 22px;
+  }
+}
