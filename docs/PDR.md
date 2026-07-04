@@ -20,6 +20,7 @@ consolidada configuravel pelo super admin.
   status financeiro sincronizado.
 - Conta Azul: API publica para sincronizar dados financeiros, vendas, clientes,
   fornecedores, produtos e notas fiscais.
+- Estrategia tecnica das integracoes: ver [INTEGRATIONS.md](INTEGRATIONS.md).
 - OWASP e NIST: autenticacao, MFA, sessao segura, controle de acesso e reducao
   de vazamento de informacoes.
 
@@ -100,7 +101,9 @@ Fase 1 - Dados reais:
 
 - Criar tabelas de integracao por provedor.
 - Implementar webhooks Asaas para pagamentos.
-- Implementar OAuth/credenciais Conta Azul conforme conta do cliente.
+- Implementar OAuth Conta Azul por empresa e polling recorrente, ja que a API
+  ainda nao oferece webhooks nativos.
+- Implementar cadastro criptografado de API key Asaas por empresa e ambiente.
 - Criar jobs de sincronizacao e reconciliacao.
 - Registrar origem, data de coleta e ultimo status de cada dado.
 
