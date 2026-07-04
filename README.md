@@ -26,6 +26,8 @@ O projeto foi preparado para operar como portal sigiloso: login obrigatorio, sen
 
 Detalhes em [docs/RBAC.md](docs/RBAC.md).
 
+O PDR do produto, benchmark e roadmap estao em [docs/PDR.md](docs/PDR.md).
+
 ## Desenvolvimento local
 
 ```bash
@@ -75,6 +77,7 @@ Documentacao:
 - [docs/SECURITY_CHECKLIST.md](docs/SECURITY_CHECKLIST.md)
 - [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 - [docs/RBAC.md](docs/RBAC.md)
+- [docs/PDR.md](docs/PDR.md)
 
 Referencias usadas:
 
