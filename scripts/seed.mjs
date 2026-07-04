@@ -26,25 +26,40 @@ function env(name, required = true) {
 
 async function upsertBootstrapUser({ email, name, password, role, companySlugs = [] }) {
   const normalizedEmail = email.toLowerCase().trim();
-  const passwordHash = await bcrypt.hash(password, 12);
-  const user = await prisma.user.upsert({
-    where: { email: normalizedEmail },
-    update: {
-      name,
-      role,
-      passwordHash,
-      mustChangePassword: true,
-      isActive: true,
-    },
-    create: {
+
+  let user = await prisma.user.findUnique({
+    where: {
       email: normalizedEmail,
-      name,
-      role,
-      passwordHash,
-      mustChangePassword: true,
-      isActive: true,
     },
   });
+
+  if (user) {
+    user = await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        name,
+        role,
+        isActive: true,
+      },
+    });
+  } else {
+    if (!password) {
+      throw new Error(`Bootstrap password is required to create ${normalizedEmail}`);
+    }
+
+    user = await prisma.user.create({
+      data: {
+        email: normalizedEmail,
+        name,
+        role,
+        passwordHash: await bcrypt.hash(password, 12),
+        mustChangePassword: true,
+        isActive: true,
+      },
+    });
+  }
 
   if (companySlugs.length) {
     const allowedCompanies = await prisma.company.findMany({
@@ -86,7 +101,7 @@ async function main() {
   await upsertBootstrapUser({
     email: env("BOOTSTRAP_SUPER_ADMIN_EMAIL"),
     name: env("BOOTSTRAP_SUPER_ADMIN_NAME"),
-    password: env("BOOTSTRAP_SUPER_ADMIN_PASSWORD"),
+    password: env("BOOTSTRAP_SUPER_ADMIN_PASSWORD", false),
     role: UserRole.SUPER_ADMIN,
   });
 
@@ -94,7 +109,7 @@ async function main() {
   const editorPassword = env("BOOTSTRAP_EDITOR_PASSWORD", false);
   const editorName = env("BOOTSTRAP_EDITOR_NAME", false);
 
-  if (editorEmail && editorPassword && editorName) {
+  if (editorEmail && editorName) {
     await upsertBootstrapUser({
       email: editorEmail,
       name: editorName,
@@ -105,6 +120,8 @@ async function main() {
         .map((item) => item.trim())
         .filter(Boolean),
     });
+  } else if (editorEmail || editorPassword || editorName) {
+    throw new Error("BOOTSTRAP_EDITOR_EMAIL and BOOTSTRAP_EDITOR_NAME must be provided together");
   }
 
   console.log("Seed completed without printing credentials.");

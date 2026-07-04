@@ -25,6 +25,10 @@ BOOTSTRAP_EDITOR_PASSWORD
 BOOTSTRAP_EDITOR_COMPANIES
 ```
 
+As variaveis de editor sao opcionais. `BOOTSTRAP_SUPER_ADMIN_PASSWORD` e
+`BOOTSTRAP_EDITOR_PASSWORD` so precisam existir para criar usuarios bootstrap
+novos; depois disso, o seed nao regrava senhas existentes.
+
 Gerar segredos:
 
 ```bash
@@ -35,22 +39,12 @@ npm run security:secrets
 
 1. Configurar variaveis no Coolify.
 2. Deployar a imagem Docker.
-3. Rodar migracao/schema:
-
-```bash
-npm run db:push
-```
-
-4. Rodar seed:
-
-```bash
-npm run db:seed
-```
-
-5. Entrar com o super admin.
-6. Configurar 2FA.
-7. Trocar a senha temporaria.
-8. Remover ou rotacionar senhas bootstrap do ambiente se nao forem mais necessarias.
+3. O container executa automaticamente `npm run db:push && npm run db:seed`
+   antes de iniciar o servidor.
+4. Entrar com o super admin.
+5. Configurar 2FA.
+6. Trocar a senha temporaria.
+7. Remover ou rotacionar senhas bootstrap do ambiente se nao forem mais necessarias.
 
 ## Deploy recorrente
 
