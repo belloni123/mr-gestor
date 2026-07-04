@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">MR Gestão mark</title>
+  <desc id="desc">Deep blue rounded-square mark with a white nautical ship wheel icon.</desc>
+  <rect width="160" height="160" rx="32" fill="#003A78"/>
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke-width="9.5">
+      <line x1="80" y1="21" x2="80" y2="42"/>
+      <line x1="80" y1="118" x2="80" y2="139"/>
+      <line x1="21" y1="80" x2="42" y2="80"/>
+      <line x1="118" y1="80" x2="139" y2="80"/>
+      <line x1="38.2" y1="38.2" x2="53.5" y2="53.5"/>
+      <line x1="106.5" y1="106.5" x2="121.8" y2="121.8"/>
+      <line x1="121.8" y1="38.2" x2="106.5" y2="53.5"/>
+      <line x1="53.5" y1="106.5" x2="38.2" y2="121.8"/>
+    </g>
+    <circle cx="80" cy="80" r="40" stroke-width="9"/>
+    <circle cx="80" cy="80" r="17" stroke-width="8"/>
+    <g stroke-width="7">
+      <line x1="80" y1="63" x2="80" y2="41"/>
+      <line x1="80" y1="97" x2="80" y2="119"/>
+      <line x1="63" y1="80" x2="41" y2="80"/>
+      <line x1="97" y1="80" x2="119" y2="80"/>
+      <line x1="68" y1="68" x2="52.5" y2="52.5"/>
+      <line x1="92" y1="92" x2="107.5" y2="107.5"/>
+      <line x1="92" y1="68" x2="107.5" y2="52.5"/>
+      <line x1="68" y1="92" x2="52.5" y2="107.5"/>
+    </g>
+  </g>
+</svg>

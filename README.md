@@ -28,6 +28,7 @@ Detalhes em [docs/RBAC.md](docs/RBAC.md).
 
 O PDR do produto, benchmark e roadmap estao em [docs/PDR.md](docs/PDR.md).
 As regras de manutencao da Central de Ajuda estao em [docs/HELP_CENTER.md](docs/HELP_CENTER.md).
+A identidade visual e os SVGs da marca estao em [docs/BRAND.md](docs/BRAND.md).
 
 ## Desenvolvimento local
 
@@ -80,6 +81,7 @@ Documentacao:
 - [docs/RBAC.md](docs/RBAC.md)
 - [docs/PDR.md](docs/PDR.md)
 - [docs/HELP_CENTER.md](docs/HELP_CENTER.md)
+- [docs/BRAND.md](docs/BRAND.md)
 
 Referencias usadas:
 

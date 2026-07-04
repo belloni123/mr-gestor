@@ -286,8 +286,9 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
     <div className="mr-app">
       <header className="global-nav">
         <div className="global-nav-inner">
-          <a className="brand-mark" href="#top" aria-label="MR Gestor inicio">
-            MR Gestor
+          <a className="brand-mark" href="#top" aria-label="MR Gestão inicio">
+            <img src="/brand/mr-gestao-mark.svg" alt="" />
+            <span>MR Gestão</span>
           </a>
           <nav className="global-links" aria-label="Navegacao principal">
             {navLinks.map((item) => (
@@ -457,7 +458,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           <section className="hero-tile" aria-labelledby="hero-title">
             <div className="hero-copy">
               <span className="eyebrow">Uso interno e portal do cliente</span>
-              <h1 id="hero-title">MR Gestor</h1>
+              <h1 id="hero-title">MR Gestão</h1>
               <p>
                 {selectedCompanies.length} empresa{selectedCompanies.length > 1 ? "s" : ""} em contexto.
               </p>

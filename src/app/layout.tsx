@@ -13,8 +13,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MR Gestor",
+  title: "MR Gestão",
   description: "Hub de gestao, controladoria e dashboards multiempresa.",
+  icons: {
+    icon: [
+      {
+        url: "/brand/mr-gestao-favicon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    shortcut: "/brand/mr-gestao-favicon.svg",
+  },
 };
 
 export default function RootLayout({

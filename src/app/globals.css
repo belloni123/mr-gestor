@@ -101,10 +101,17 @@ a {
 .brand-mark {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   height: 44px;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0;
+}
+
+.brand-mark img {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
 }
 
 .global-links {
@@ -1426,6 +1433,11 @@ td:nth-child(5) {
   display: grid;
   gap: 18px;
   padding: 28px;
+}
+
+.auth-logo-lockup {
+  width: min(100%, 260px);
+  height: auto;
 }
 
 .auth-card-wide {

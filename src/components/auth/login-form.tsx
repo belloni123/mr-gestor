@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { LockKeyhole, ShieldCheck } from "lucide-react";
+import { LockKeyhole } from "lucide-react";
 
 export function LoginForm() {
   const [error, setError] = useState("");
@@ -37,12 +37,10 @@ export function LoginForm() {
 
   return (
     <form className="auth-card" onSubmit={onSubmit}>
-      <div className="auth-mark">
-        <ShieldCheck size={22} />
-      </div>
+      <img className="auth-logo-lockup" src="/brand/mr-gestao-logo.svg" alt="MR Gestão" />
       <div className="auth-heading">
         <span>Portal seguro</span>
-        <h1>MR Gestor</h1>
+        <h1>MR Gestão</h1>
         <p>Acesse com senha e dupla autenticacao.</p>
       </div>
 
