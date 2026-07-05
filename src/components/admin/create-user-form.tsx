@@ -22,8 +22,8 @@ export function CreateUserForm({ companies }: { companies: CompanyOption[] }) {
     <form className="settings-card admin-form" action={formAction}>
       <div className="settings-heading">
         <span>Super admin</span>
-        <h1>Novo usuario</h1>
-        <p>Crie usuarios com senha inicial, troca obrigatoria e 2FA no primeiro acesso.</p>
+        <h1>Novo usuário</h1>
+        <p>Crie usuários com senha inicial, troca obrigatória e 2FA no primeiro acesso.</p>
       </div>
 
       <label>
@@ -63,7 +63,7 @@ export function CreateUserForm({ companies }: { companies: CompanyOption[] }) {
 
       <button className="auth-submit" disabled={pending} type="submit">
         <UserPlus size={17} />
-        {pending ? "Criando..." : "Criar usuario"}
+        {pending ? "Criando..." : "Criar usuário"}
       </button>
     </form>
   );

@@ -15,28 +15,28 @@
 - [ ] `SESSION_SECRET` com pelo menos 32 caracteres.
 - [ ] `APP_ENCRYPTION_KEY` gerada em base64 com 32 bytes.
 - [ ] HTTPS ativo.
-- [ ] Dominio correto.
+- [ ] Domínio correto.
 - [ ] Seed rodado sem imprimir credenciais.
 - [ ] Super admin configurou 2FA.
-- [ ] Senhas temporarias foram trocadas.
+- [ ] Senhas temporárias foram trocadas.
 
-## Operacao continua
+## Operação continua
 
-- [ ] Revisar usuarios ativos mensalmente.
-- [ ] Desativar usuarios sem necessidade de acesso.
+- [ ] Revisar usuários ativos mensalmente.
+- [ ] Desativar usuários sem necessidade de acesso.
 - [ ] Revisar empresas vinculadas a editores.
-- [ ] Rodar auditoria de dependencias antes de cada release.
+- [ ] Rodar auditoria de dependências antes de cada release.
 - [ ] Rotacionar segredos se houver suspeita de vazamento.
 - [ ] Manter backups do PostgreSQL.
 
-## Integracoes externas
+## Integrações externas
 
 - [ ] Criptografar API keys, access tokens e refresh tokens em repouso.
 - [ ] Nunca imprimir credenciais de Asaas ou Conta Azul em logs.
-- [ ] Separar credenciais de Sandbox/Desenvolvimento e Producao.
+- [ ] Separar credenciais de Sandbox/Desenvolvimento e Produção.
 - [ ] Validar token de webhook Asaas pelo header `asaas-access-token`.
-- [ ] Processar webhooks com idempotencia.
+- [ ] Processar webhooks com idempotência.
 - [ ] Retornar HTTP `200` rapidamente nos webhooks e processar em worker.
 - [ ] Aplicar backoff para respostas `429`.
 - [ ] Marcar Conta Azul como `REAUTH_REQUIRED` em falhas de refresh/OAuth.
-- [ ] Auditar conexao, desconexao, rotacao de chave e troca de ambiente.
+- [ ] Auditar conexão, desconexão, rotação de chave e troca de ambiente.

@@ -14,15 +14,15 @@ export default async function GovernancePage() {
   return (
     <AppShell
       user={user}
-      eyebrow="Governanca"
-      title="Seguranca e auditoria"
-      subtitle="Controles de acesso, MFA, eventos sensiveis e trilha operacional para manter o portal sigiloso."
+      eyebrow="Governança"
+      title="Segurança e auditoria"
+      subtitle="Controles de acesso, MFA, eventos sensíveis e trilha operacional para manter o portal sigiloso."
     >
       <section className="page-card-grid">
         <article className="page-card">
           <ShieldCheck size={20} />
-          <h2>MFA obrigatorio</h2>
-          <p>Todo usuario passa por dupla autenticacao antes de acessar dados das empresas.</p>
+          <h2>MFA obrigatório</h2>
+          <p>Todo usuário passa por dupla autenticação antes de acessar dados das empresas.</p>
         </article>
         <article className="page-card">
           <LockKeyhole size={20} />
@@ -32,12 +32,12 @@ export default async function GovernancePage() {
         <article className="page-card">
           <UserCog size={20} />
           <h2>RBAC</h2>
-          <p>Super admin gerencia usuarios, senhas e permissoes. Editor altera apenas a propria senha.</p>
+          <p>Super admin gerencia usuários, senhas e permissões. Editor altera apenas a própria senha.</p>
         </article>
         <article className="page-card">
           <Activity size={20} />
           <h2>Auditoria</h2>
-          <p>Eventos sensiveis sao registrados para revisao operacional.</p>
+          <p>Eventos sensíveis são registrados para revisão operacional.</p>
         </article>
       </section>
 
@@ -61,7 +61,7 @@ export default async function GovernancePage() {
             {!auditLogs.length ? <div className="empty-state">Sem eventos recentes.</div> : null}
           </div>
         ) : (
-          <div className="security-notice">A trilha completa de auditoria e visivel apenas para super admin.</div>
+          <div className="security-notice">A trilha completa de auditoria é visível apenas para super admin.</div>
         )}
       </section>
     </AppShell>

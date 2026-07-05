@@ -21,16 +21,16 @@ export default async function SettingsPage() {
   return (
     <AppShell
       user={user}
-      eyebrow="Configuracoes"
+      eyebrow="Configurações"
       title="Central administrativa"
-      subtitle="Ajustes de conta, usuarios, permissoes, empresas, integracoes e seguranca em um lugar proprio."
+      subtitle="Ajustes de conta, usuários, permissões, empresas, integrações e segurança em um lugar próprio."
     >
       <section className="page-hero compact">
         <div>
           <span className="eyebrow">Ajustes</span>
-          <h1>Configuracao nao e apenas trocar senha.</h1>
+          <h1>Configuração não é apenas trocar senha.</h1>
           <p>
-            Super admin tem acesso a usuarios, empresas, permissoes e governanca. Editor ve somente a propria seguranca e
+            Super admin tem acesso a usuários, empresas, permissões e governança. Editor vê somente a própria segurança e
             empresas liberadas.
           </p>
         </div>
@@ -40,33 +40,33 @@ export default async function SettingsPage() {
         <SettingsLink
           href="/account/security"
           icon={KeyRound}
-          title="Minha seguranca"
-          text="Trocar senha e revisar seu nivel de permissao."
+          title="Minha segurança"
+          text="Trocar senha e revisar seu nível de permissão."
         />
         {user.role === "SUPER_ADMIN" ? (
           <>
             <SettingsLink
               href="/admin/users"
               icon={UserCog}
-              title="Usuarios e editores"
+              title="Usuários e editores"
               text="Criar editor, resetar senha, ativar/desativar acesso e marcar empresas permitidas."
             />
             <SettingsLink
               href="/companies"
               icon={Building2}
               title="Empresas"
-              text="Revisar empresas cadastradas e preparar futuras configuracoes por CNPJ/cliente."
+              text="Revisar empresas cadastradas e preparar futuras configurações por CNPJ/cliente."
             />
             <SettingsLink
               href="/integrations"
               icon={DatabaseZap}
-              title="Integracoes"
-              text="Acompanhar Asaas, Conta Azul, ambientes e proximas credenciais."
+              title="Integrações"
+              text="Acompanhar Asaas, Conta Azul, ambientes e próximas credenciais."
             />
             <SettingsLink
               href="/governance"
               icon={ShieldCheck}
-              title="Governanca"
+              title="Governança"
               text="Ver controles de acesso, auditoria e checklist de sigilo."
             />
           </>
@@ -83,13 +83,13 @@ export default async function SettingsPage() {
         </div>
         <div className="settings-status-grid">
           <StatusTile icon={Fingerprint} title="Identidade" text={user.name} />
-          <StatusTile icon={LockKeyhole} title="Nivel de acesso" text={user.role === "SUPER_ADMIN" ? "Super admin" : "Editor"} />
+          <StatusTile icon={LockKeyhole} title="Nível de acesso" text={user.role === "SUPER_ADMIN" ? "Super admin" : "Editor"} />
           <StatusTile
             icon={Building2}
             title="Empresas"
             text={user.role === "SUPER_ADMIN" ? "Todas liberadas" : `${user.companies.length} vinculada(s)`}
           />
-          <StatusTile icon={Activity} title="Operacao" text="Sessao segura e MFA ativo" />
+          <StatusTile icon={Activity} title="Operação" text="Sessão segura e MFA ativo" />
         </div>
         <div className="permission-list icon-permission-list">
           {user.role === "SUPER_ADMIN" ? (

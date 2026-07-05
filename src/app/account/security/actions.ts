@@ -18,7 +18,7 @@ export async function changeOwnPasswordAction(_: PasswordState, formData: FormDa
   const confirmPassword = String(formData.get("confirmPassword") ?? "");
 
   if (newPassword !== confirmPassword) {
-    return { ok: false, message: "A confirmacao nao confere." };
+    return { ok: false, message: "A confirmação não confere." };
   }
 
   const policyError = validatePasswordPolicy(newPassword, [sessionUser.email, sessionUser.name]);
@@ -37,7 +37,7 @@ export async function changeOwnPasswordAction(_: PasswordState, formData: FormDa
   });
 
   if (!user || !(await verifyPassword(currentPassword, user.passwordHash))) {
-    return { ok: false, message: "Senha atual invalida." };
+    return { ok: false, message: "Senha atual inválida." };
   }
 
   await prisma.user.update({
@@ -54,7 +54,7 @@ export async function changeOwnPasswordAction(_: PasswordState, formData: FormDa
   await auditLog({
     userId: user.id,
     action: AuditAction.PASSWORD_CHANGED,
-    message: "Usuario alterou a propria senha.",
+    message: "Usuário alterou a própria senha.",
   });
 
   await setAuthenticatedSession(user.id);

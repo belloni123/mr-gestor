@@ -19,7 +19,7 @@ const loginSchema = z.object({
   password: z.string().min(1),
 });
 
-const GENERIC_LOGIN_ERROR = "Credenciais invalidas ou conta temporariamente indisponivel.";
+const GENERIC_LOGIN_ERROR = "Credenciais inválidas ou conta temporariamente indisponível.";
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     await auditLog({
       userId: user.id,
       action: AuditAction.LOGIN_FAILURE,
-      message: "Login bloqueado por lockout temporario.",
+      message: "Login bloqueado por lockout temporário.",
       ip,
       userAgent,
     });
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     await auditLog({
       userId: user.id,
       action: AuditAction.LOGIN_FAILURE,
-      message: "Senha invalida.",
+      message: "Senha inválida.",
       ip,
       userAgent,
     });

@@ -26,7 +26,7 @@ export function MfaVerifyForm() {
     setLoading(false);
 
     if (!response.ok) {
-      setError(data.error ?? "Codigo invalido.");
+      setError(data.error ?? "Código inválido.");
       return;
     }
 
@@ -39,13 +39,13 @@ export function MfaVerifyForm() {
         <ShieldCheck size={22} />
       </div>
       <div className="auth-heading">
-        <span>Dupla autenticacao</span>
-        <h1>Codigo 2FA</h1>
-        <p>Digite o codigo temporario do seu app autenticador.</p>
+        <span>Dupla autenticação</span>
+        <h1>Código 2FA</h1>
+        <p>Digite o código temporário do seu app autenticador.</p>
       </div>
 
       <label>
-        Codigo de 6 digitos
+        Código de 6 dígitos
         <input name="token" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9 ]{6,10}" required />
       </label>
 
@@ -53,7 +53,7 @@ export function MfaVerifyForm() {
 
       <button className="auth-submit" disabled={loading} type="submit">
         <KeyRound size={17} />
-        {loading ? "Validando..." : "Validar codigo"}
+        {loading ? "Validando..." : "Validar código"}
       </button>
     </form>
   );

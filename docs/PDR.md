@@ -2,31 +2,31 @@
 
 ## Objetivo
 
-O MR Gestor e um hub interno de gestao e controladoria para a NoFront Scale,
+O MR Gestor é um hub interno de gestão e controladoria para a NoFront Scale,
 com acesso seguro por cliente/empresa, dashboards financeiros e operacionais,
-e base preparada para integracoes com Asaas e Conta Azul.
+e base preparada para integrações com Asaas e Conta Azul.
 
-O produto nao nasce como SaaS publico. Ele deve atender a operacao interna e
-clientes autorizados, com isolamento forte de dados por empresa e uma visao
-consolidada configuravel pelo super admin.
+O produto não nasce como SaaS público. Ele deve atender a operação interna e
+clientes autorizados, com isolamento forte de dados por empresa e uma visão
+consolidada configurável pelo super admin.
 
-## Referencias e benchmark
+## Referências e benchmark
 
-- Demo base: Hub Estrategico MR Cont, usado como referencia funcional para o
-  hub de controladoria e navegacao entre visoes.
-- Apple DesignMD: referencia visual para superficies limpas, hierarquia clara,
-  tipografia de sistema, action blue, pouco ruido visual e foco no conteudo.
+- Demo base: Hub Estratégico MR Cont, usado como referência funcional para o
+  hub de controladoria e navegação entre visões.
+- Apple DesignMD: referencia visual para superfícies limpas, hierarquia clara,
+  tipografia de sistema, action blue, pouco ruído visual e foco no conteúdo.
 - Asaas: webhooks e eventos de pagamento como caminho principal para manter
   status financeiro sincronizado.
-- Conta Azul: API publica para sincronizar dados financeiros, vendas, clientes,
+- Conta Azul: API pública para sincronizar dados financeiros, vendas, clientes,
   fornecedores, produtos e notas fiscais.
-- Estrategia tecnica das integracoes: ver [INTEGRATIONS.md](INTEGRATIONS.md).
-- OWASP e NIST: autenticacao, MFA, sessao segura, controle de acesso e reducao
-  de vazamento de informacoes.
+- Estratégia técnica das integrações: ver [INTEGRATIONS.md](INTEGRATIONS.md).
+- OWASP e NIST: autenticação, MFA, sessão segura, controle de acesso e redução
+  de vazamento de informações.
 
 Links:
 
-- https://martinsromeromrcont.github.io/apresentacaonofront-controladoria/Hub_Estrategico_DEMO.html
+- https://martinsromeromrcont.github.io/apresentaçãonofront-controladoria/Hub_Estrategico_DEMO.html
 - https://github.com/VoltAgent/awesome-design-md/blob/main/design-md/apple/DESIGN.md
 - https://docs.asaas.com/docs/payment-events
 - https://developers.contaazul.com/aboutapis
@@ -39,7 +39,7 @@ Links:
 Super admin:
 
 - Acessa todas as empresas.
-- Cria, edita e desativa usuarios.
+- Cria, edita e desativa usuários.
 - Define quais empresas cada editor pode acessar.
 - Visualiza dashboards individuais e consolidados.
 
@@ -47,50 +47,50 @@ Editor:
 
 - Acessa somente empresas explicitamente vinculadas.
 - Visualiza os dados autorizados.
-- Pode trocar a propria senha.
-- Nao administra usuarios nem acessa empresas fora do vinculo.
+- Pode trocar a própria senha.
+- Não administra usuários nem acessa empresas fora do vínculo.
 
 Perfil futuro recomendado:
 
-- Viewer/Cliente: somente leitura, sem permissoes de edicao operacional.
+- Viewer/Cliente: somente leitura, sem permissões de edição operacional.
 
 ## Requisitos funcionais
 
-- Login com senha e MFA obrigatorio.
-- Cadastro e gestao de usuarios por papel.
-- Cadastro logico de empresas.
+- Login com senha e MFA obrigatório.
+- Cadastro e gestão de usuários por papel.
+- Cadastro lógico de empresas.
 - Isolamento de payload por empresa no servidor.
 - Dashboards por empresa.
 - Dashboard consolidado com seletor de empresas.
-- Possibilidade de selecionar todas, algumas ou uma empresa para consolidacao.
-- Base para integracoes Asaas e Conta Azul.
-- Auditoria de eventos sensiveis.
+- Possibilidade de selecionar todas, algumas ou uma empresa para consolidação.
+- Base para integrações Asaas e Conta Azul.
+- Auditoria de eventos sensíveis.
 - Interface responsiva para uso em celular.
 
-## Requisitos nao funcionais
+## Requisitos não funcionais
 
-- Nao versionar `.env` nem segredos.
-- Usar cookies httpOnly, secure em producao e SameSite.
-- Usar lockout temporario contra tentativa de senha.
-- Nao retornar mensagens de login que revelem se o usuario existe.
-- Manter headers de seguranca em producao.
-- Evitar que editores recebam dados de empresas nao autorizadas no HTML/JSON.
+- Não versionar `.env` nem segredos.
+- Usar cookies httpOnly, secure em produção e SameSite.
+- Usar lockout temporário contra tentativa de senha.
+- Não retornar mensagens de login que revelem se o usuário existe.
+- Manter headers de segurança em produção.
+- Evitar que editores recebam dados de empresas não autorizadas no HTML/JSON.
 - Fazer deploy via Docker no Coolify.
-- Manter README, checklist de seguranca, RBAC e deploy atualizados.
-- Atualizar a Central de Ajuda a cada nova funcionalidade, inteligencia,
-  integracao, automacao, regra de acesso ou mudanca operacional relevante.
+- Manter README, checklist de segurança, RBAC e deploy atualizados.
+- Atualizar a Central de Ajuda a cada nova funcionalidade, inteligência,
+  integração, automação, regra de acesso ou mudança operacional relevante.
 
-## Entregue nesta versao
+## Entregue nesta versão
 
-- Autenticacao com senha, sessao segura e MFA TOTP.
+- Autenticação com senha, sessão segura e MFA TOTP.
 - Super admin inicial criado por seed.
-- Seed idempotente que nao regrava senha em redeploy.
-- Remocao da senha bootstrap do Coolify apos criacao do usuario.
+- Seed idempotente que não regrava senha em redeploy.
+- Remoção da senha bootstrap do Coolify após criação do usuário.
 - RBAC para super admin e editor.
-- Admin de usuarios em `/admin/users`.
-- Pagina de troca de senha em `/account/security`.
-- Empresas iniciais: Agencia B16 e Maestro Tiago Santos.
-- Dashboard demo filtrado no servidor por permissoes.
+- Admin de usuários em `/admin/users`.
+- Página de troca de senha em `/account/security`.
+- Empresas iniciais: Agência B16 e Maestro Tiago Santos.
+- Dashboard demo filtrado no servidor por permissões.
 - Dockerfile preparado para rodar Prisma schema push e seed antes do servidor.
 - PostgreSQL criado e conectado no Coolify.
 - Deploy em `https://gestao.nofrontscale.com.br`.
@@ -99,40 +99,40 @@ Perfil futuro recomendado:
 
 Fase 1 - Dados reais:
 
-- Criar tabelas de integracao por provedor.
+- Criar tabelas de integração por provedor.
 - Implementar webhooks Asaas para pagamentos.
-- Implementar OAuth Conta Azul por empresa e polling recorrente, ja que a API
-  ainda nao oferece webhooks nativos.
+- Implementar OAuth Conta Azul por empresa e polling recorrente, já que a API
+  ainda não oferece webhooks nativos.
 - Implementar cadastro criptografado de API key Asaas por empresa e ambiente.
-- Criar jobs de sincronizacao e reconciliacao.
-- Registrar origem, data de coleta e ultimo status de cada dado.
+- Criar jobs de sincronização e reconciliação.
+- Registrar origem, data de coleta e último status de cada dado.
 
 Fase 2 - Dashboards:
 
-- Separar receitas, despesas, inadimplencia, fluxo de caixa e margem.
+- Separar receitas, despesas, inadimplência, fluxo de caixa e margem.
 - Criar comparativo mensal e anual.
-- Adicionar filtros por periodo, empresa, categoria e centro de custo.
+- Adicionar filtros por período, empresa, categoria e centro de custo.
 - Criar visual consolidado com checkboxes de empresas.
-- Permitir exportacao de relatorios.
+- Permitir exportação de relatórios.
 
-Fase 3 - Operacao segura:
+Fase 3 - Operação segura:
 
 - Tela de auditoria para super admin.
 - Backup e rotina de restore testada.
-- Rotacao documentada de segredos.
-- Politica de usuarios inativos.
+- Rotação documentada de segredos.
+- Política de usuários inativos.
 - Perfil Viewer para clientes com acesso somente leitura.
 
-## Criterios de aceite
+## Critérios de aceite
 
-- Usuario sem sessao sempre redireciona para `/login`.
-- Login valido sempre exige MFA antes do dashboard.
-- Primeiro acesso exige configuracao de 2FA.
-- Dashboard mostra uma Central de Ajuda com orientacoes de primeiro acesso e
-  status das integracoes.
-- Usuario com `mustChangePassword` e redirecionado para troca de senha.
-- Editor nao recebe dados de empresas fora do vinculo.
-- Super admin consegue criar usuario e alterar empresas permitidas.
-- Login mobile em 390px nao tem overflow horizontal.
-- Headers de seguranca estao presentes em producao.
-- Nenhum arquivo `.env` real esta versionado.
+- Usuário sem sessão sempre redireciona para `/login`.
+- Login válido sempre exige MFA antes do dashboard.
+- Primeiro acesso exige configuração de 2FA.
+- Dashboard mostra uma Central de Ajuda com orientações de primeiro acesso e
+  status das integrações.
+- Usuário com `mustChangePassword` é redirecionado para troca de senha.
+- Editor não recebe dados de empresas fora do vínculo.
+- Super admin consegue criar usuário e alterar empresas permitidas.
+- Login mobile em 390px não tem overflow horizontal.
+- Headers de segurança estão presentes em produção.
+- Nenhum arquivo `.env` real está versionado.

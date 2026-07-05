@@ -42,7 +42,7 @@ const topLinks = [
   { label: "Ajuda", href: "/help" },
   { label: "Controladoria", href: "/controladoria" },
   { label: "Empresas", href: "/companies" },
-  { label: "Integracoes", href: "/integrations" },
+  { label: "Integrações", href: "/integrations" },
 ];
 
 const moduleItems: NavigationItem[] = [
@@ -51,9 +51,9 @@ const moduleItems: NavigationItem[] = [
   { label: "Controladoria", icon: FileChartColumnIncreasing, href: "/controladoria" },
   { label: "Empresas", icon: Building2, href: "/companies" },
   { label: "Clientes", icon: Users, href: "/clients" },
-  { label: "Integracoes", icon: DatabaseZap, href: "/integrations" },
-  { label: "Governanca", icon: ShieldCheck, href: "/governance" },
-  { label: "Usuarios", icon: UserCog, href: "/admin/users", superAdminOnly: true },
+  { label: "Integrações", icon: DatabaseZap, href: "/integrations" },
+  { label: "Governança", icon: ShieldCheck, href: "/governance" },
+  { label: "Usuários", icon: UserCog, href: "/admin/users", superAdminOnly: true },
   { label: "Ajustes", icon: Settings, href: "/settings" },
 ];
 
@@ -62,7 +62,7 @@ function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function AppShell({ user, title, subtitle, eyebrow = "MR Gestao", actions, children }: AppShellProps) {
+export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", actions, children }: AppShellProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -81,11 +81,11 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestao", actions
     <div className="mr-app">
       <header className="global-nav">
         <div className="global-nav-inner">
-          <a className="brand-mark" href="/" aria-label="MR Gestao inicio">
+          <a className="brand-mark" href="/" aria-label="MR Gestão início">
             <img src="/brand/mr-gestao-mark.svg" alt="" />
             <span>MR Gestão</span>
           </a>
-          <nav className="global-links" aria-label="Navegacao principal">
+          <nav className="global-links" aria-label="Navegação principal">
             {topLinks.map((item) => (
               <a className={isActivePath(pathname, item.href) ? "active" : undefined} href={item.href} key={item.href}>
                 {item.label}
@@ -98,11 +98,11 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestao", actions
               <strong>{user.name}</strong>
             </div>
             {user.role === "SUPER_ADMIN" ? (
-              <a className="icon-button" href="/admin/users" aria-label="Administrar usuarios" title="Administrar usuarios">
+              <a className="icon-button" href="/admin/users" aria-label="Administrar usuários" title="Administrar usuários">
                 <UserCog size={17} />
               </a>
             ) : null}
-            <a className="icon-button" href="/settings" aria-label="Configuracoes" title="Configuracoes">
+            <a className="icon-button" href="/settings" aria-label="Configurações" title="Configurações">
               <Settings size={17} />
             </a>
             <button
@@ -127,9 +127,9 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestao", actions
                 setMobileMenuOpen(false);
               }}
               type="button"
-              aria-label="Notificacoes"
+              aria-label="Notificações"
               aria-expanded={notificationsOpen}
-              title="Notificacoes"
+              title="Notificações"
             >
               <Bell size={17} />
             </button>
@@ -162,7 +162,7 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestao", actions
             </div>
             <label className="search-field">
               <Search size={16} />
-              <input placeholder="Buscar modulos, empresas e ajuda" />
+              <input placeholder="Buscar módulos, empresas e ajuda" />
             </label>
             <div className="quick-links">
               {visibleModules.map((item) => (
@@ -175,26 +175,26 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestao", actions
         ) : null}
 
         {notificationsOpen ? (
-          <div className="floating-panel notifications-panel" role="dialog" aria-label="Notificacoes">
+          <div className="floating-panel notifications-panel" role="dialog" aria-label="Notificações">
             <div className="panel-heading compact">
-              <span>Notificacoes</span>
+              <span>Notificações</span>
               <button
                 className="icon-button light"
                 onClick={() => setNotificationsOpen(false)}
                 type="button"
-                aria-label="Fechar notificacoes"
+                aria-label="Fechar notificações"
               >
                 <X size={16} />
               </button>
             </div>
             <div className="notification-stack">
               <a href="/integrations">
-                <strong>Integracoes em preparacao</strong>
+                <strong>Integrações em preparação</strong>
                 <span>Asaas e Conta Azul seguem em modo demonstrativo.</span>
               </a>
               <a href="/help">
                 <strong>Central de ajuda ampliada</strong>
-                <span>Guias operacionais agora ficam em pagina propria.</span>
+                <span>Guias operacionais agora ficam em página própria.</span>
               </a>
             </div>
           </div>
@@ -228,7 +228,7 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestao", actions
       </div>
 
       <main className="app-shell">
-        <aside className="left-rail" aria-label="Modulos">
+        <aside className="left-rail" aria-label="Módulos">
           {visibleModules.map((item) => {
             const Icon = item.icon;
             return (

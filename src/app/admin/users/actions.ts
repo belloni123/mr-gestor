@@ -77,18 +77,18 @@ export async function createUserAction(previousState: AdminActionState = initial
     await auditLog({
       userId: admin.id,
       action: AuditAction.USER_CREATED,
-      message: `Usuario criado: ${email}`,
+      message: `Usuário criado: ${email}`,
       metadata: {
         createdUserId: user.id,
         role,
       },
     });
   } catch {
-    return { ok: false, message: "Nao foi possivel criar usuario. Confira se o e-mail ja existe." };
+    return { ok: false, message: "Não foi possível criar usuário. Confira se o e-mail já existe." };
   }
 
   revalidatePath("/admin/users");
-  return { ok: true, message: "Usuario criado com senha inicial e 2FA obrigatorio." };
+  return { ok: true, message: "Usuário criado com senha inicial e 2FA obrigatório." };
 }
 
 export async function resetUserPasswordAction(previousState: AdminActionState = initialAdminState, formData: FormData) {
@@ -103,7 +103,7 @@ export async function resetUserPasswordAction(previousState: AdminActionState = 
   });
 
   if (!target) {
-    return { ok: false, message: "Usuario nao encontrado." };
+    return { ok: false, message: "Usuário não encontrado." };
   }
 
   const policyError = validatePasswordPolicy(password, [target.email, target.name]);
@@ -133,7 +133,7 @@ export async function resetUserPasswordAction(previousState: AdminActionState = 
   });
 
   revalidatePath("/admin/users");
-  return { ok: true, message: "Senha resetada. O usuario devera troca-la no proximo acesso." };
+  return { ok: true, message: "Senha resetada. O usuário deverá trocá-la no próximo acesso." };
 }
 
 export async function updateUserCompaniesAction(previousState: AdminActionState = initialAdminState, formData: FormData) {
@@ -148,7 +148,7 @@ export async function updateUserCompaniesAction(previousState: AdminActionState 
   });
 
   if (!target) {
-    return { ok: false, message: "Usuario nao encontrado." };
+    return { ok: false, message: "Usuário não encontrado." };
   }
 
   if (target.role === UserRole.EDITOR && companySlugs.length === 0) {
@@ -205,7 +205,7 @@ export async function toggleUserActiveAction(formData: FormData) {
   await auditLog({
     userId: admin.id,
     action: AuditAction.USER_UPDATED,
-    message: `${nextActive ? "Usuario ativado" : "Usuario desativado"}: ${user.email}`,
+    message: `${nextActive ? "Usuário ativado" : "Usuário desativado"}: ${user.email}`,
     metadata: {
       targetUserId: user.id,
     },

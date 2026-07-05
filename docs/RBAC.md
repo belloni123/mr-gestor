@@ -1,56 +1,56 @@
 # RBAC e acesso por empresa
 
-## Papeis
+## Papéis
 
 ### SUPER_ADMIN
 
-Permissoes:
+Permissões:
 
 - Ver todas as empresas cadastradas.
-- Criar usuarios.
-- Resetar senha inicial de usuarios.
-- Ativar/desativar usuarios.
-- Alterar empresas vinculadas a usuarios.
+- Criar usuários.
+- Resetar senha inicial de usuários.
+- Ativar/desativar usuários.
+- Alterar empresas vinculadas a usuários.
 - Acessar o painel `/admin/users`.
 
 ### EDITOR
 
-Permissoes:
+Permissões:
 
 - Ver dashboards somente das empresas vinculadas.
 - Editar dados futuros das empresas vinculadas.
-- Trocar a propria senha em `/account/security`.
+- Trocar a própria senha em `/account/security`.
 
-Restricoes:
+Restrições:
 
-- Nao acessa `/admin/users`.
-- Nao cria usuario.
-- Nao altera permissao de outros usuarios.
-- Nao recebe dados de empresas nao vinculadas no payload do dashboard.
+- Não acessa `/admin/users`.
+- Não cria usuário.
+- Não altera permissão de outros usuários.
+- Não recebe dados de empresas não vinculadas no payload do dashboard.
 
 ## Empresas iniciais
 
-- `b16`: Agencia B16
+- `b16`: Agência B16
 - `maestro`: Maestro Tiago Santos
 
-O seed cria as empresas se ainda nao existirem.
+O seed cria as empresas se ainda não existirem.
 
 ## Fluxo de primeiro acesso
 
-1. Super admin/editor e criado por seed ou painel admin.
-2. Usuario entra com senha temporaria.
+1. Super admin/editor é criado por seed ou painel admin.
+2. Usuário entra com senha temporária.
 3. Sistema exige setup de 2FA TOTP.
 4. Sistema exige troca da senha inicial.
-5. Usuario passa a acessar somente o que seu papel permite.
+5. Usuário passa a acessar somente o que seu papel permite.
 
 ## Matriz resumida
 
-| Acao | SUPER_ADMIN | EDITOR |
+| Ação | SUPER_ADMIN | EDITOR |
 | --- | --- | --- |
-| Ver todas as empresas | Sim | Nao |
+| Ver todas as empresas | Sim | Não |
 | Ver empresa vinculada | Sim | Sim |
-| Criar usuario | Sim | Nao |
-| Resetar senha de outro usuario | Sim | Nao |
-| Alterar propria senha | Sim | Sim |
-| Alterar empresas permitidas | Sim | Nao |
-| Acessar admin | Sim | Nao |
+| Criar usuário | Sim | Não |
+| Resetar senha de outro usuário | Sim | Não |
+| Alterar própria senha | Sim | Sim |
+| Alterar empresas permitidas | Sim | Não |
+| Acessar admin | Sim | Não |

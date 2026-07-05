@@ -17,14 +17,14 @@ export default async function ControladoriaPage() {
       user={user}
       eyebrow="Controladoria"
       title="Centro financeiro"
-      subtitle="Visao gerencial de receita, recebimento, despesas, vencidos, margem e proximas acoes."
+      subtitle="Visão gerencial de receita, recebimento, despesas, vencidos, margem e próximas ações."
     >
       <section className="page-hero compact">
         <div>
           <span className="eyebrow">Fechamento gerencial</span>
           <h1>Indicadores para decidir, cobrar e priorizar.</h1>
           <p>
-            Esta pagina separa a leitura financeira do dashboard principal e prepara a futura conciliacao com Asaas e Conta
+            Esta página separa a leitura financeira do dashboard principal e prepara a futura conciliação com Asaas e Conta
             Azul.
           </p>
         </div>
@@ -71,7 +71,7 @@ export default async function ControladoriaPage() {
             <div><span>Recebido</span><strong>{toBrl(totals.recebido)}</strong></div>
             <div><span>Despesas a pagar</span><strong>{toBrl(totals.aPagar)}</strong></div>
             <div><span>Resultado</span><strong>{toBrl(totals.resultado)}</strong></div>
-            <div><span>Ticket medio</span><strong>{toBrl(totals.ticket)}</strong></div>
+            <div><span>Ticket médio</span><strong>{toBrl(totals.ticket)}</strong></div>
           </div>
         </article>
 
@@ -80,12 +80,12 @@ export default async function ControladoriaPage() {
             <WalletCards size={20} />
             <div>
               <span className="eyebrow">Risco financeiro</span>
-              <h2>Fila de atencao</h2>
+              <h2>Fila de atenção</h2>
             </div>
           </div>
           <div className="action-list">
-            <span>Priorizar cobrancas vencidas acima de {toBrl(3000)}.</span>
-            <span>Validar categorias gerenciais antes da integracao real.</span>
+            <span>Priorizar cobranças vencidas acima de {toBrl(3000)}.</span>
+            <span>Validar categorias gerenciais antes da integração real.</span>
             <span>Separar vencimentos por empresa no fechamento mensal.</span>
           </div>
         </article>

@@ -11,16 +11,16 @@ export default async function IntegrationsPage() {
   return (
     <AppShell
       user={user}
-      eyebrow="Integracoes"
+      eyebrow="Integrações"
       title="Asaas e Conta Azul"
-      subtitle="Painel operacional para acompanhar provedores, ambientes, credenciais e proximas etapas de sincronizacao."
+      subtitle="Painel operacional para acompanhar provedores, ambientes, credenciais e próximas etapas de sincronização."
     >
       <section className="page-hero compact">
         <div>
           <span className="eyebrow">Dados reais</span>
-          <h1>As integracoes ficam por ultimo, mas a arquitetura ja esta preparada.</h1>
+          <h1>As integrações ficam por último, mas a arquitetura já está preparada.</h1>
           <p>
-            Esta pagina mostra status por empresa e documenta o que sera conectado quando as credenciais oficiais estiverem
+            Esta página mostra status por empresa e documenta o que será conectado quando as credenciais oficiais estiverem
             prontas.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default async function IntegrationsPage() {
               </div>
             </div>
             <div className="provider-list">
-              <ProviderStatus name="Asaas" status={company.integrations.asaas} description="API key, webhooks e reconciliacao." />
+              <ProviderStatus name="Asaas" status={company.integrations.asaas} description="API key, webhooks e reconciliação." />
               <ProviderStatus name="Conta Azul" status={company.integrations.contaAzul} description="OAuth 2.0 e polling recorrente." />
             </div>
           </article>
@@ -52,18 +52,18 @@ export default async function IntegrationsPage() {
         </article>
         <article className="page-card">
           <RefreshCcw size={20} />
-          <h2>Sincronizacao</h2>
-          <p>Dashboards devem ler dados internos normalizados. APIs externas entram por jobs, webhooks e conciliacao.</p>
+          <h2>Sincronização</h2>
+          <p>Dashboards devem ler dados internos normalizados. APIs externas entram por jobs, webhooks e conciliação.</p>
         </article>
         <article className="page-card">
           <ShieldCheck size={20} />
-          <h2>Seguranca</h2>
-          <p>Asaas valida webhook com token dedicado. Conta Azul exige reautorizacao quando refresh/OAuth falhar.</p>
+          <h2>Segurança</h2>
+          <p>Asaas valida webhook com token dedicado. Conta Azul exige reautorização quando refresh/OAuth falhar.</p>
         </article>
         <article className="page-card">
           <DatabaseZap size={20} />
-          <h2>Proxima fase</h2>
-          <p>Criar tela segura para cadastrar credenciais e depois ativar Sandbox antes de producao.</p>
+          <h2>Próxima fase</h2>
+          <p>Criar tela segura para cadastrar credenciais e depois ativar Sandbox antes de produção.</p>
         </article>
       </section>
     </AppShell>

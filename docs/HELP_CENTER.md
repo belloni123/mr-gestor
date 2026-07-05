@@ -3,50 +3,50 @@
 ## Regra permanente
 
 A Central de Ajuda do MR Gestor deve ser atualizada no mesmo commit de qualquer
-mudanca que altere a experiencia, a operacao ou a interpretacao dos dados.
+mudança que altere a experiência, a operação ou a interpretação dos dados.
 
 Isso inclui:
 
-- Nova tela, botao, menu ou fluxo.
-- Nova inteligencia, automacao ou alerta.
-- Nova integracao ou alteracao no status de Asaas/Conta Azul.
-- Mudanca de permissao, papel, empresa ou regra de acesso.
-- Nova metrica, grafico, filtro, exportacao ou relatorio.
-- Mudanca de seguranca que afete login, 2FA, senha, sessao ou auditoria.
+- Nova tela, botão, menu ou fluxo.
+- Nova inteligência, automação ou alerta.
+- Nova integração ou alteração no status de Asaas/Conta Azul.
+- Mudança de permissão, papel, empresa ou regra de acesso.
+- Nova métrica, gráfico, filtro, exportação ou relatório.
+- Mudança de segurança que afete login, 2FA, senha, sessão ou auditoria.
 
 ## Onde atualizar
 
-- Conteudo visivel principal: `src/app/help/page.tsx`.
-- Conteudo resumido do dashboard: `src/components/mr-gestor-app.tsx`, bloco
-  `helpCards` e secao `Central de Ajuda`.
-- Politica de produto: `docs/PDR.md`.
-- Regras de manutencao para agentes: `AGENTS.md`.
-- Documentos especificos quando aplicavel: `docs/RBAC.md`,
+- Conteúdo visível principal: `src/app/help/page.tsx`.
+- Conteúdo resumido do dashboard: `src/components/mr-gestor-app.tsx`, bloco
+  `helpCards` e seção `Central de Ajuda`.
+- Política de produto: `docs/PDR.md`.
+- Regras de manutenção para agentes: `AGENTS.md`.
+- Documentos específicos quando aplicável: `docs/RBAC.md`,
   `docs/DEPLOYMENT.md` e `docs/SECURITY_CHECKLIST.md`.
 
-## Conteudo minimo por novidade
+## Conteúdo mínimo por novidade
 
-Cada atualizacao deve responder:
+Cada atualização deve responder:
 
 - O que mudou.
 - Quem pode usar.
-- Quais empresas/dados sao afetados.
+- Quais empresas/dados são afetados.
 - Se a funcionalidade usa dados reais ou demonstrativos.
-- Quais cuidados de seguranca ou operacao existem.
+- Quais cuidados de segurança ou operação existem.
 
 ## Estado atual
 
-- A navegacao principal foi separada em paginas reais: dashboard, ajuda,
-  controladoria, empresas, clientes, integracoes, governanca e configuracoes.
-- A Central de Ajuda agora possui pagina propria em `/help`.
-- Configuracoes agora possui hub administrativo em `/settings`; troca de senha
+- A navegação principal foi separada em páginas reais: dashboard, ajuda,
+  controladoria, empresas, clientes, integrações, governança e configurações.
+- A Central de Ajuda agora possui página própria em `/help`.
+- Configurações agora possui hub administrativo em `/settings`; troca de senha
   continua em `/account/security`.
-- Login usa fundo fotografico local, card com efeito premium e animacao de
-  entrada respeitando preferencia de movimento reduzido.
-- Configuracoes recebeu reforco iconografico para atalhos, status de acesso e
+- Login usa fundo fotográfico local, card com efeito premium e animação de
+  entrada respeitando preferência de movimento reduzido.
+- Configurações recebeu reforço iconográfico para atalhos, status de acesso e
   empresas permitidas.
-- Login, 2FA, RBAC, troca de senha e administracao de usuarios estao ativos.
-- Banco PostgreSQL esta em producao no Coolify.
-- Dashboards ainda usam dados demonstrativos filtrados por permissao.
-- Asaas e Conta Azul aparecem como status operacional, mas a sincronizacao real
-  ainda depende da implementacao dos conectores e credenciais.
+- Login, 2FA, RBAC, troca de senha e administração de usuários estão ativos.
+- Banco PostgreSQL está em produção no Coolify.
+- Dashboards ainda usam dados demonstrativos filtrados por permissão.
+- Asaas e Conta Azul aparecem como status operacional, mas a sincronização real
+  ainda depende da implementação dos conectores e credenciais.

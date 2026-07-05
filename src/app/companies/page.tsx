@@ -14,13 +14,13 @@ export default async function CompaniesPage() {
       user={user}
       eyebrow="Empresas"
       title="Empresas cadastradas"
-      subtitle="Base multiempresa para visualizar dados isolados, permissao por editor e consolidacao seletiva."
+      subtitle="Base multiempresa para visualizar dados isolados, permissão por editor e consolidação seletiva."
     >
       <section className="page-hero compact">
         <div>
           <span className="eyebrow">Multiempresa</span>
-          <h1>Cada empresa com contexto proprio. O consolidado vem depois.</h1>
-          <p>Hoje a base inclui empresas demonstrativas; na fase real, cada uma tera suas conexoes Asaas e Conta Azul.</p>
+          <h1>Cada empresa com contexto próprio. O consolidado vem depois.</h1>
+          <p>Hoje a base inclui empresas demonstrativas; na fase real, cada uma terá suas conexões Asaas e Conta Azul.</p>
         </div>
       </section>
 

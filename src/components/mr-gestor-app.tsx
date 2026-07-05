@@ -66,7 +66,7 @@ const navLinks = [
   { label: "Ajuda", href: "/help" },
   { label: "Controladoria", href: "/controladoria" },
   { label: "Empresas", href: "/companies" },
-  { label: "Integracoes", href: "/integrations" },
+  { label: "Integrações", href: "/integrations" },
 ];
 
 const moduleItems: ModuleItem[] = [
@@ -75,8 +75,8 @@ const moduleItems: ModuleItem[] = [
   { label: "Controladoria", icon: FileChartColumnIncreasing, href: "/controladoria" },
   { label: "Empresas", icon: Building2, href: "/companies" },
   { label: "Clientes", icon: Users, href: "/clients" },
-  { label: "Integracoes", icon: DatabaseZap, href: "/integrations" },
-  { label: "Governanca", icon: ShieldCheck, href: "/governance" },
+  { label: "Integrações", icon: DatabaseZap, href: "/integrations" },
+  { label: "Governança", icon: ShieldCheck, href: "/governance" },
   { label: "Ajustes", icon: Settings, href: "/settings" },
 ];
 
@@ -92,22 +92,22 @@ const pieColors = ["#0066cc", "#1d1d1f", "#7a7a7a", "#2997ff", "#cccccc"];
 const helpCards = [
   {
     title: "Primeiro acesso",
-    text: "Ative o 2FA, troque a senha temporaria e confira se o seu usuario esta nas empresas corretas.",
+    text: "Ative o 2FA, troque a senha temporária e confira se o seu usuário está nas empresas corretas.",
     icon: CheckCircle2,
   },
   {
     title: "Leitura dos dados",
-    text: "Use os chips de empresa para ver uma empresa isolada ou consolidar varias empresas no mesmo dashboard.",
+    text: "Use os chips de empresa para ver uma empresa isolada ou consolidar várias empresas no mesmo dashboard.",
     icon: ClipboardList,
   },
   {
-    title: "Status das integracoes",
-    text: "Esta versao ja esta pronta para apresentacao segura, mas Asaas e Conta Azul ainda estao em modo demonstrativo.",
+    title: "Status das integrações",
+    text: "Esta versão já está pronta para apresentação segura, mas Asaas e Conta Azul ainda estão em modo demonstrativo.",
     icon: Info,
   },
   {
     title: "Novidades do MR Gestor",
-    text: "Toda nova inteligencia, tela ou automacao deve ser registrada aqui antes de ser apresentada ao cliente.",
+    text: "Toda nova inteligência, tela ou automação deve ser registrada aqui antes de ser apresentada ao cliente.",
     icon: Megaphone,
   },
 ];
@@ -179,7 +179,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
-  const [syncNotice, setSyncNotice] = useState("Dados demonstrativos carregados para apresentacao.");
+  const [syncNotice, setSyncNotice] = useState("Dados demonstrativos carregados para apresentação.");
 
   const selectedCompanies = useMemo(() => {
     const filtered = companies.filter((company) => selectedIds.includes(company.id));
@@ -265,7 +265,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
 
   function showSyncStatus() {
     setSyncNotice(
-      "Sincronizacao real ainda depende das credenciais Asaas e Conta Azul. O painel atual usa dados demonstrativos seguros.",
+      "Sincronização real ainda depende das credenciais Asaas e Conta Azul. O painel atual usa dados demonstrativos seguros.",
     );
   }
 
@@ -285,11 +285,11 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
     <div className="mr-app">
       <header className="global-nav">
         <div className="global-nav-inner">
-          <a className="brand-mark" href="/" aria-label="MR Gestão inicio">
+          <a className="brand-mark" href="/" aria-label="MR Gestão início">
             <img src="/brand/mr-gestao-mark.svg" alt="" />
             <span>MR Gestão</span>
           </a>
-          <nav className="global-links" aria-label="Navegacao principal">
+          <nav className="global-links" aria-label="Navegação principal">
             {navLinks.map((item) => (
               <a href={item.href} key={item.href}>
                 {item.label}
@@ -302,11 +302,11 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
               <strong>{user.name}</strong>
             </div>
             {user.role === "SUPER_ADMIN" ? (
-              <a className="icon-button" href="/admin/users" aria-label="Administrar usuarios" title="Administrar usuarios">
+              <a className="icon-button" href="/admin/users" aria-label="Administrar usuários" title="Administrar usuários">
                 <UserCog size={17} />
               </a>
             ) : null}
-            <a className="icon-button" href="/settings" aria-label="Configuracoes" title="Configuracoes">
+            <a className="icon-button" href="/settings" aria-label="Configurações" title="Configurações">
               <Settings size={17} />
             </a>
             <button
@@ -331,9 +331,9 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
                 setMobileMenuOpen(false);
               }}
               type="button"
-              aria-label="Notificacoes"
+              aria-label="Notificações"
               aria-expanded={notificationsOpen}
-              title="Notificacoes"
+              title="Notificações"
             >
               <Bell size={17} />
             </button>
@@ -356,19 +356,19 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           </div>
         </div>
         {searchOpen ? (
-          <div className="floating-panel search-panel" role="dialog" aria-label="Busca rapida">
+          <div className="floating-panel search-panel" role="dialog" aria-label="Busca rápida">
             <div className="panel-heading compact">
-              <span>Busca rapida</span>
+              <span>Busca rápida</span>
               <button className="icon-button light" onClick={() => setSearchOpen(false)} type="button" aria-label="Fechar busca">
                 <X size={16} />
               </button>
             </div>
             <label className="search-field">
               <Search size={16} />
-              <input placeholder="Buscar modulos, empresas e ajuda" />
+              <input placeholder="Buscar módulos, empresas e ajuda" />
             </label>
             <div className="quick-links">
-              {[...navLinks, { label: "Configuracoes", href: "/settings" }].map((item) => (
+              {[...navLinks, { label: "Configurações", href: "/settings" }].map((item) => (
                 <a href={item.href} key={item.href} onClick={handleSectionClick}>
                   {item.label}
                 </a>
@@ -377,14 +377,14 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           </div>
         ) : null}
         {notificationsOpen ? (
-          <div className="floating-panel notifications-panel" role="dialog" aria-label="Notificacoes">
+          <div className="floating-panel notifications-panel" role="dialog" aria-label="Notificações">
             <div className="panel-heading compact">
-              <span>Notificacoes</span>
+              <span>Notificações</span>
               <button
                 className="icon-button light"
                 onClick={() => setNotificationsOpen(false)}
                 type="button"
-                aria-label="Fechar notificacoes"
+                aria-label="Fechar notificações"
               >
                 <X size={16} />
               </button>
@@ -407,8 +407,8 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
                   {item.label}
                 </a>
               ))}
-              {user.role === "SUPER_ADMIN" ? <a href="/admin/users">Usuarios</a> : null}
-              <a href="/settings">Configuracoes</a>
+              {user.role === "SUPER_ADMIN" ? <a href="/admin/users">Usuários</a> : null}
+              <a href="/settings">Configurações</a>
               <button onClick={logout} type="button">
                 Sair
               </button>
@@ -428,7 +428,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
               <Filter size={16} />
               Filtros
             </button>
-            <button className="period-pill" onClick={openFilters} type="button" aria-label="Alterar periodo">
+            <button className="period-pill" onClick={openFilters} type="button" aria-label="Alterar período">
               Jul 2026
               <ChevronDown size={15} />
             </button>
@@ -441,7 +441,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
       </div>
 
       <main className="app-shell">
-        <aside className="left-rail" aria-label="Modulos">
+        <aside className="left-rail" aria-label="Módulos">
           {moduleItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -468,7 +468,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             <div className="hero-metrics">
               <MetricMini label="Receita" value={toCompactBrl(totals.receita)} />
               <MetricMini label="Resultado" value={toCompactBrl(totals.resultado)} />
-              <MetricMini label="Inadimplencia" value={toPercent(totals.inadimplencia)} />
+              <MetricMini label="Inadimplência" value={toPercent(totals.inadimplencia)} />
             </div>
           </section>
 
@@ -477,7 +477,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
               <span className="eyebrow">Central de Ajuda</span>
               <h2 id="help-title">Comece por aqui</h2>
               <p>
-                Orientacoes essenciais para usar o portal, entender o status dos dados e acompanhar as novidades do MR Gestor.
+                Orientações essenciais para usar o portal, entender o status dos dados e acompanhar as novidades do MR Gestor.
               </p>
             </div>
             <div className="help-card-grid">
@@ -500,7 +500,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             </div>
           </section>
 
-          <section className="company-filter-bar" aria-label="Selecao de empresas">
+          <section className="company-filter-bar" aria-label="Seleção de empresas">
             <div className="filter-label">Empresas</div>
             <div className="company-chips">
               {companies.map((company) => {
@@ -524,7 +524,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             </button>
           </section>
 
-          <section className="view-tabs" aria-label="Visoes do dashboard">
+          <section className="view-tabs" aria-label="Visões do dashboard">
             {views.map((item) => {
               const Icon = item.icon;
               const active = item.id === view;
@@ -544,7 +544,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           </section>
 
           <section className="kpi-grid" aria-label="Indicadores principais">
-            <KpiCard icon={TrendingUp} label="Receita do periodo" value={toBrl(totals.receita)} delta="+5,1% vs mes anterior" />
+              <KpiCard icon={TrendingUp} label="Receita do período" value={toBrl(totals.receita)} delta="+5,1% vs mês anterior" />
             <KpiCard icon={CircleDollarSign} label="Recebido" value={toBrl(totals.recebido)} delta={`${toPercent((totals.recebido / totals.receita) * 100)} da receita`} />
             <KpiCard icon={WalletCards} label="A receber" value={toBrl(totals.aReceber)} delta={`${toBrl(totals.vencido)} vencidos`} tone={totals.vencido > 5000 ? "warn" : "ok"} />
             <KpiCard icon={PieChartIcon} label="Margem gerencial" value={toPercent(totals.margem)} delta={`${toBrl(totals.resultado)} de resultado`} />
@@ -580,7 +580,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             <article className="chart-card">
               <div className="card-heading">
                 <div>
-                  <span className="eyebrow">Composicao</span>
+                  <span className="eyebrow">Composição</span>
                   <h2>{view === "pagar" ? "Despesas" : "Receitas"}</h2>
                 </div>
               </div>
@@ -682,7 +682,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
 
           <section className="sync-card" id="integracoes">
             <div className="panel-heading">
-              <span>Integracoes</span>
+              <span>Integrações</span>
               <DatabaseZap size={16} />
             </div>
             {companies.map((company) => (
@@ -821,7 +821,7 @@ function FinancialTable({
               <tr>
                 <th>Empresa</th>
                 <th>Cliente</th>
-                <th>Descricao</th>
+                <th>Descrição</th>
                 <th>Vencimento</th>
                 <th>Valor</th>
                 <th>Status</th>

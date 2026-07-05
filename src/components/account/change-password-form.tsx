@@ -17,7 +17,7 @@ export function ChangePasswordForm() {
     <form className="settings-card" action={formAction}>
       <div className="settings-heading">
         <span>Conta</span>
-        <h1>Seguranca da conta</h1>
+        <h1>Segurança da conta</h1>
         <p>Troque sua senha inicial e mantenha 2FA ativo.</p>
       </div>
 

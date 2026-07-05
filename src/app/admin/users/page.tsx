@@ -37,8 +37,8 @@ export default async function AdminUsersPage() {
     <main className="settings-page">
       <section className="settings-shell admin-shell">
         <div className="settings-topbar">
-          <Link href="/settings">Voltar as configuracoes</Link>
-          <strong>Administracao de usuarios</strong>
+          <Link href="/settings">Voltar às configurações</Link>
+          <strong>Administração de usuários</strong>
         </div>
 
         <CreateUserForm companies={companies} />
@@ -46,8 +46,8 @@ export default async function AdminUsersPage() {
         <section className="settings-card user-list-card">
           <div className="settings-heading">
             <span>RBAC</span>
-            <h1>Usuarios cadastrados</h1>
-            <p>Super admin ve tudo. Editor so ve e edita empresas marcadas abaixo.</p>
+            <h1>Usuários cadastrados</h1>
+            <p>Super admin vê tudo. Editor só vê e edita empresas marcadas abaixo.</p>
           </div>
 
           <div className="admin-user-list">
@@ -77,7 +77,7 @@ export default async function AdminUsersPage() {
                   <input name="userId" type="hidden" value={user.id} />
                   <input name="nextActive" type="hidden" value={String(!user.isActive)} />
                   <button className="danger-action" type="submit">
-                    {user.isActive ? "Desativar usuario" : "Ativar usuario"}
+                    {user.isActive ? "Desativar usuário" : "Ativar usuário"}
                   </button>
                 </form>
               </article>

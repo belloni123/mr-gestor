@@ -33,7 +33,7 @@ export function validatePasswordPolicy(password: string, context: string[] = [])
   }
 
   if (COMMON_PASSWORDS.has(normalized) || blockedByContext) {
-    return "Use uma senha menos previsivel e sem dados da empresa ou do usuario.";
+    return "Use uma senha menos previsível e sem dados da empresa ou do usuário.";
   }
 
   return null;

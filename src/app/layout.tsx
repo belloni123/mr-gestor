@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "MR Gestão",
-  description: "Hub de gestao, controladoria e dashboards multiempresa.",
+  description: "Hub de gestão, controladoria e dashboards multiempresa.",
   icons: {
     icon: [
       {

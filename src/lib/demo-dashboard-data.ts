@@ -5,8 +5,8 @@ import type { DashboardCompany } from "@/lib/dashboard-types";
 export const demoCompanies: DashboardCompany[] = [
   {
     id: "b16",
-    name: "Agencia B16",
-    legalName: "Agencia B16 Comunicacao Ltda.",
+    name: "Agência B16",
+    legalName: "Agência B16 Comunicação Ltda.",
     segment: "Marketing e performance",
     owner: "NoFront Scale",
     status: "Ativa",
@@ -41,7 +41,7 @@ export const demoCompanies: DashboardCompany[] = [
     ],
     despesas: [
       { name: "Equipe", value: 21800 },
-      { name: "Midia", value: 13200 },
+      { name: "Mídia", value: 13200 },
       { name: "Ferramentas", value: 6100 },
       { name: "Operacional", value: 4800 },
     ],
@@ -55,7 +55,7 @@ export const demoCompanies: DashboardCompany[] = [
       },
       {
         cliente: "DentoPlus",
-        descricao: "Gestao de campanhas",
+        descricao: "Gestão de campanhas",
         vencimento: "2026-07-04",
         valor: 5200,
         status: "Vence hoje",
@@ -71,7 +71,7 @@ export const demoCompanies: DashboardCompany[] = [
     payables: [
       {
         cliente: "Meta Ads",
-        descricao: "Midia clientes",
+        descricao: "Mídia clientes",
         vencimento: "2026-07-06",
         valor: 13200,
         status: "Agendado",
@@ -100,10 +100,10 @@ export const demoCompanies: DashboardCompany[] = [
   {
     id: "maestro",
     name: "Maestro Tiago Santos",
-    legalName: "Tiago Santos Producoes Musicais",
-    segment: "Educacao musical",
+    legalName: "Tiago Santos Produções Musicais",
+    segment: "Educação musical",
     owner: "NoFront Scale",
-    status: "Implantacao",
+    status: "Implantação",
     accent: "#1d1d1f",
     integrations: {
       asaas: "Conectado",
@@ -136,7 +136,7 @@ export const demoCompanies: DashboardCompany[] = [
     despesas: [
       { name: "Equipe", value: 12300 },
       { name: "Plataformas", value: 7200 },
-      { name: "Producao", value: 6100 },
+      { name: "Produção", value: 6100 },
       { name: "Administrativo", value: 4600 },
     ],
     receivables: [
@@ -171,8 +171,8 @@ export const demoCompanies: DashboardCompany[] = [
         status: "Agendado",
       },
       {
-        cliente: "Estudio parceiro",
-        descricao: "Gravacao modulo novo",
+        cliente: "Estúdio parceiro",
+        descricao: "Gravação módulo novo",
         vencimento: "2026-07-14",
         valor: 5400,
         status: "Em dia",
@@ -180,7 +180,7 @@ export const demoCompanies: DashboardCompany[] = [
     ],
     alerts: [
       {
-        title: "Implantacao quase pronta",
+        title: "Implantação quase pronta",
         text: "Conta Azul e Asaas conectados; falta validar categorias gerenciais.",
         tone: "good",
       },

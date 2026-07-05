@@ -22,13 +22,13 @@ export function MfaSetupForm() {
       .then(({ response, data }) => {
         if (cancelled) return;
         if (!response.ok) {
-          setError(data.error ?? "Setup de 2FA indisponivel.");
+          setError(data.error ?? "Setup de 2FA indisponível.");
           return;
         }
         setEnrollment(data);
       })
       .catch(() => {
-        if (!cancelled) setError("Nao foi possivel carregar o QR Code.");
+        if (!cancelled) setError("Não foi possível carregar o QR Code.");
       });
 
     return () => {
@@ -55,7 +55,7 @@ export function MfaSetupForm() {
     setLoading(false);
 
     if (!response.ok) {
-      setError(data.error ?? "Codigo invalido.");
+      setError(data.error ?? "Código inválido.");
       return;
     }
 
@@ -86,7 +86,7 @@ export function MfaSetupForm() {
       )}
 
       <label>
-        Codigo de 6 digitos
+        Código de 6 dígitos
         <input name="token" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9 ]{6,10}" required />
       </label>
 

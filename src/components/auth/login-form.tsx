@@ -28,7 +28,7 @@ export function LoginForm() {
     setLoading(false);
 
     if (!response.ok) {
-      setError(data.error ?? "Nao foi possivel entrar.");
+      setError(data.error ?? "Não foi possível entrar.");
       return;
     }
 
@@ -41,7 +41,7 @@ export function LoginForm() {
       <div className="auth-heading">
         <span>Portal seguro</span>
         <h1>Bem-vindo de volta</h1>
-        <p>Acesse seu painel de gestao com senha e dupla autenticacao.</p>
+        <p>Acesse seu painel de gestão com senha e dupla autenticação.</p>
       </div>
 
       <label>
@@ -58,7 +58,7 @@ export function LoginForm() {
 
       <button className="auth-submit" disabled={loading} type="submit">
         <LockKeyhole size={17} />
-        {loading ? "Validando..." : "Entrar com seguranca"}
+        {loading ? "Validando..." : "Entrar com segurança"}
       </button>
     </form>
   );

@@ -14,14 +14,14 @@ export default async function ClientsPage() {
     <AppShell
       user={user}
       eyebrow="Clientes"
-      title="Carteira e recebiveis"
+      title="Carteira e recebíveis"
       subtitle="Leitura inicial de clientes, contratos e contas a receber por empresa autorizada."
     >
       <section className="page-hero compact">
         <div>
           <span className="eyebrow">Carteira</span>
-          <h1>Clientes com contexto financeiro, nao apenas uma lista.</h1>
-          <p>Esta pagina prepara a futura sincronizacao de clientes Asaas e Conta Azul com status de cobranca.</p>
+          <h1>Clientes com contexto financeiro, não apenas uma lista.</h1>
+          <p>Esta página prepara a futura sincronização de clientes Asaas e Conta Azul com status de cobrança.</p>
         </div>
       </section>
 
@@ -31,7 +31,7 @@ export default async function ClientsPage() {
             <Users size={20} />
             <h2>{company.name}</h2>
             <p>{company.metrics.clientes} clientes ativos em dados demonstrativos.</p>
-            <strong>{toBrl(company.metrics.ticket)} ticket medio</strong>
+            <strong>{toBrl(company.metrics.ticket)} ticket médio</strong>
           </article>
         ))}
       </section>
@@ -40,7 +40,7 @@ export default async function ClientsPage() {
         <div className="card-heading">
           <div>
             <span className="eyebrow">{receivables.length} registros</span>
-            <h2>Recebiveis por cliente</h2>
+            <h2>Recebíveis por cliente</h2>
           </div>
           <WalletCards size={20} />
         </div>
@@ -50,7 +50,7 @@ export default async function ClientsPage() {
               <tr>
                 <th>Empresa</th>
                 <th>Cliente</th>
-                <th>Descricao</th>
+                <th>Descrição</th>
                 <th>Vencimento</th>
                 <th>Valor</th>
                 <th>Status</th>

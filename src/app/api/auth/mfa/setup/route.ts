@@ -18,7 +18,7 @@ export async function GET() {
 
   if (!session.pendingMfa || session.pendingMfa.purpose !== "setup" || isMfaPendingExpired(session.pendingMfa.issuedAt)) {
     session.destroy();
-    return NextResponse.json({ error: "Sessao de 2FA expirada." }, { status: 401 });
+    return NextResponse.json({ error: "Sessão de 2FA expirada." }, { status: 401 });
   }
 
   const user = await getPrisma().user.findUnique({
@@ -28,7 +28,7 @@ export async function GET() {
 
   if (!user || user.mfaEnabled) {
     session.destroy();
-    return NextResponse.json({ error: "Setup de 2FA indisponivel." }, { status: 409 });
+    return NextResponse.json({ error: "Setup de 2FA indisponível." }, { status: 409 });
   }
 
   if (!session.pendingMfa.secret) {
@@ -46,23 +46,23 @@ export async function POST(request: NextRequest) {
   const parsed = verifySchema.safeParse(await request.json().catch(() => null));
 
   if (!parsed.success || !session.pendingMfa || session.pendingMfa.purpose !== "setup" || !session.pendingMfa.secret) {
-    return NextResponse.json({ error: "Codigo invalido." }, { status: 400 });
+    return NextResponse.json({ error: "Código inválido." }, { status: 400 });
   }
 
   if (isMfaPendingExpired(session.pendingMfa.issuedAt)) {
     session.destroy();
-    return NextResponse.json({ error: "Sessao de 2FA expirada." }, { status: 401 });
+    return NextResponse.json({ error: "Sessão de 2FA expirada." }, { status: 401 });
   }
 
   if (!verifyTotp(parsed.data.token, session.pendingMfa.secret)) {
     await auditLog({
       userId: session.pendingMfa.userId,
       action: AuditAction.LOGIN_FAILURE,
-      message: "Codigo TOTP invalido no setup.",
+      message: "Código TOTP inválido no setup.",
       ip,
       userAgent,
     });
-    return NextResponse.json({ error: "Codigo invalido." }, { status: 401 });
+    return NextResponse.json({ error: "Código inválido." }, { status: 401 });
   }
 
   await getPrisma().user.update({

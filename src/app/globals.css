@@ -1925,6 +1925,7 @@ td:nth-child(5) {
 .auth-logo-lockup {
   width: min(100%, 260px);
   height: auto;
+  justify-self: center;
   filter: drop-shadow(0 10px 24px rgba(0, 58, 120, 0.16));
 }
 

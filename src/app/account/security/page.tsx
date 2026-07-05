@@ -19,25 +19,25 @@ export default async function AccountSecurityPage({ searchParams }: AccountSecur
     <main className="settings-page">
       <section className="settings-shell">
         <div className="settings-topbar">
-          <Link href="/settings">Voltar as configuracoes</Link>
+          <Link href="/settings">Voltar às configurações</Link>
           <strong>{user.name}</strong>
         </div>
 
         {params.required ? (
           <div className="security-notice">
-            Por seguranca, troque a senha inicial antes de acessar os dados das empresas.
+            Por segurança, troque a senha inicial antes de acessar os dados das empresas.
           </div>
         ) : null}
 
         <ChangePasswordForm />
 
         <aside className="settings-card settings-summary">
-          <span>Permissao</span>
+          <span>Permissão</span>
           <h2>{user.role === "SUPER_ADMIN" ? "Super admin" : "Editor"}</h2>
           <p>
             {user.role === "SUPER_ADMIN"
-              ? "Acesso completo para usuarios, empresas, auditoria e configuracoes."
-              : "Acesso limitado as empresas marcadas para sua conta."}
+              ? "Acesso completo para usuários, empresas, auditoria e configurações."
+              : "Acesso limitado às empresas marcadas para sua conta."}
           </p>
           <div className="permission-list">
             {user.companies.map((company) => (

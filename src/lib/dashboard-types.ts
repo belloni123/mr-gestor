@@ -30,7 +30,7 @@ export type DashboardCompany = {
   legalName: string;
   segment: string;
   owner: string;
-  status: "Ativa" | "Implantacao";
+  status: "Ativa" | "Implantação";
   accent: string;
   integrations: {
     asaas: "Conectado" | "Pendente";

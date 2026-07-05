@@ -1,8 +1,8 @@
 # MR Gestor
 
-Hub interno de gestao, controladoria e dashboards multiempresa da NoFront Scale.
+Hub interno de gestão, controladoria e dashboards multiempresa da NoFront Scale.
 
-O projeto foi preparado para operar como portal sigiloso: login obrigatorio, senha com hash forte, 2FA TOTP, sessoes em cookie HTTP-only, RBAC por papel, permissao por empresa, auditoria e checklist de deploy.
+O projeto foi preparado para operar como portal sigiloso: login obrigatório, senha com hash forte, 2FA TOTP, sessões em cookie HTTP-only, RBAC por papel, permissão por empresa, auditoria e checklist de deploy.
 
 ## Stack
 
@@ -11,7 +11,7 @@ O projeto foi preparado para operar como portal sigiloso: login obrigatorio, sen
 - TypeScript
 - Prisma ORM
 - PostgreSQL
-- `iron-session` para sessao HTTP-only
+- `iron-session` para sessão HTTP-only
 - `bcryptjs` para hash de senha
 - `otplib` para 2FA TOTP
 - Recharts e Lucide Icons
@@ -19,17 +19,17 @@ O projeto foi preparado para operar como portal sigiloso: login obrigatorio, sen
 
 ## Modelo de acesso
 
-- `SUPER_ADMIN`: pode ver todas as empresas, criar usuarios, resetar senhas, ativar/desativar usuarios e alterar empresas permitidas.
-- `EDITOR`: pode acessar somente as empresas vinculadas a ele e trocar a propria senha.
-- Todo usuario precisa concluir 2FA no primeiro acesso.
-- Usuarios criados por seed/admin entram com senha temporaria e sao obrigados a troca-la.
+- `SUPER_ADMIN`: pode ver todas as empresas, criar usuários, resetar senhas, ativar/desativar usuários e alterar empresas permitidas.
+- `EDITOR`: pode acessar somente as empresas vinculadas a ele e trocar a própria senha.
+- Todo usuário precisa concluir 2FA no primeiro acesso.
+- Usuários criados por seed/admin entram com senha temporária e são obrigados a trocá-la.
 
 Detalhes em [docs/RBAC.md](docs/RBAC.md).
 
-O PDR do produto, benchmark e roadmap estao em [docs/PDR.md](docs/PDR.md).
-As regras de manutencao da Central de Ajuda estao em [docs/HELP_CENTER.md](docs/HELP_CENTER.md).
-A identidade visual e os SVGs da marca estao em [docs/BRAND.md](docs/BRAND.md).
-A estrategia de integracao com Conta Azul e Asaas esta em [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md).
+O PDR do produto, benchmark e roadmap estão em [docs/PDR.md](docs/PDR.md).
+As regras de manutenção da Central de Ajuda estão em [docs/HELP_CENTER.md](docs/HELP_CENTER.md).
+A identidade visual e os SVGs da marca estão em [docs/BRAND.md](docs/BRAND.md).
+A estratégia de integração com Conta Azul e Asaas está em [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md).
 
 ## Desenvolvimento local
 
@@ -39,7 +39,7 @@ cp .env.example .env.local
 npm run security:secrets
 ```
 
-Preencha `.env.local` com `DATABASE_URL`, `SESSION_SECRET`, `APP_ENCRYPTION_KEY` e os usuarios bootstrap.
+Preencha `.env.local` com `DATABASE_URL`, `SESSION_SECRET`, `APP_ENCRYPTION_KEY` e os usuários bootstrap.
 
 ```bash
 npm run db:push
@@ -47,9 +47,9 @@ npm run db:seed
 npm run dev
 ```
 
-Aplicacao local: http://localhost:3000
+Aplicação local: http://localhost:3000
 
-## Validacao
+## Validação
 
 ```bash
 npm run db:generate
@@ -62,19 +62,19 @@ npm audit --audit-level=moderate
 
 O projeto inclui `Dockerfile` com `next.config.ts` em modo `standalone`.
 
-Dominio:
+Domínio:
 
 ```txt
 https://gestao.nofrontscale.com.br
 ```
 
-Passos de producao em [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+Passos de produção em [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
-## Seguranca
+## Segurança
 
-Arquivos `.env`, `.env.local` e qualquer arquivo com segredo real nao devem ser commitados. O repositorio inclui apenas `.env.example`.
+Arquivos `.env`, `.env.local` e qualquer arquivo com segredo real não devem ser commitados. O repositório inclui apenas `.env.example`.
 
-Documentacao:
+Documentação:
 
 - [SECURITY.md](SECURITY.md)
 - [docs/SECURITY_CHECKLIST.md](docs/SECURITY_CHECKLIST.md)
@@ -85,7 +85,7 @@ Documentacao:
 - [docs/BRAND.md](docs/BRAND.md)
 - [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md)
 
-Referencias usadas:
+Referências usadas:
 
 - OWASP Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
 - OWASP Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html

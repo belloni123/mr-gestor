@@ -10,8 +10,8 @@
 
 ## Uso
 
-- Use o logo principal em superficies amplas, como login, propostas e materiais
-  de apresentacao.
+- Use o logo principal em superfícies amplas, como login, propostas e materiais
+  de apresentação.
 - Use o mark quadrado no header, avatares de produto e locais compactos.
 - Use o favicon SVG para abas de navegador e atalhos.
 
@@ -26,4 +26,4 @@
 
 - Fundo do login: foto de agua durante o dia por Conor Sexton na Unsplash.
 - Fonte: https://unsplash.com/pt-br/fotografias/corpo-de-agua-durante-o-dia-hRemch0ZDwI
-- Uso gratuito sob a Licenca da Unsplash, conforme pagina original.
+- Uso gratuito sob a Licença da Unsplash, conforme página original.
