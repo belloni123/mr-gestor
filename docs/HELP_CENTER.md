@@ -41,6 +41,10 @@ Cada atualizacao deve responder:
 - A Central de Ajuda agora possui pagina propria em `/help`.
 - Configuracoes agora possui hub administrativo em `/settings`; troca de senha
   continua em `/account/security`.
+- Login usa fundo fotografico local, card com efeito premium e animacao de
+  entrada respeitando preferencia de movimento reduzido.
+- Configuracoes recebeu reforco iconografico para atalhos, status de acesso e
+  empresas permitidas.
 - Login, 2FA, RBAC, troca de senha e administracao de usuarios estao ativos.
 - Banco PostgreSQL esta em producao no Coolify.
 - Dashboards ainda usam dados demonstrativos filtrados por permissao.

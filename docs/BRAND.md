@@ -6,6 +6,7 @@
 - Mark quadrado: `public/brand/mr-gestao-mark.svg`
 - Favicon SVG: `public/brand/mr-gestao-favicon.svg`
 - App Router icon: `src/app/icon.svg`
+- Fundo do login: `public/media/login-water-unsplash-2200.jpg`
 
 ## Uso
 
@@ -20,3 +21,9 @@
 - Cor principal: azul profundo `#003A78`.
 - Tipografia: sans-serif moderna, proxima de Helvetica/San Francisco.
 - Estilo: vetorial, plano, profissional, escalavel e sem efeitos decorativos.
+
+## Fotografia
+
+- Fundo do login: foto de agua durante o dia por Conor Sexton na Unsplash.
+- Fonte: https://unsplash.com/pt-br/fotografias/corpo-de-agua-durante-o-dia-hRemch0ZDwI
+- Uso gratuito sob a Licenca da Unsplash, conforme pagina original.

@@ -1,5 +1,14 @@
 import Link from "next/link";
-import { Building2, DatabaseZap, KeyRound, ShieldCheck, UserCog } from "lucide-react";
+import {
+  Activity,
+  Building2,
+  DatabaseZap,
+  Fingerprint,
+  KeyRound,
+  LockKeyhole,
+  ShieldCheck,
+  UserCog,
+} from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 import { getProtectedPageContext } from "@/lib/protected-page";
@@ -64,7 +73,7 @@ export default async function SettingsPage() {
         ) : null}
       </section>
 
-      <section className="page-section">
+      <section className="page-section settings-access-panel">
         <div className="section-heading">
           <ShieldCheck size={20} />
           <div>
@@ -72,10 +81,28 @@ export default async function SettingsPage() {
             <h2>{user.role === "SUPER_ADMIN" ? "Super admin" : "Editor"}</h2>
           </div>
         </div>
-        <div className="permission-list">
-          {user.role === "SUPER_ADMIN" ? <span>Todas as empresas</span> : null}
+        <div className="settings-status-grid">
+          <StatusTile icon={Fingerprint} title="Identidade" text={user.name} />
+          <StatusTile icon={LockKeyhole} title="Nivel de acesso" text={user.role === "SUPER_ADMIN" ? "Super admin" : "Editor"} />
+          <StatusTile
+            icon={Building2}
+            title="Empresas"
+            text={user.role === "SUPER_ADMIN" ? "Todas liberadas" : `${user.companies.length} vinculada(s)`}
+          />
+          <StatusTile icon={Activity} title="Operacao" text="Sessao segura e MFA ativo" />
+        </div>
+        <div className="permission-list icon-permission-list">
+          {user.role === "SUPER_ADMIN" ? (
+            <span>
+              <ShieldCheck size={14} />
+              Todas as empresas
+            </span>
+          ) : null}
           {user.companies.map((company) => (
-            <span key={company.id}>{company.name}</span>
+            <span key={company.id}>
+              <Building2 size={14} />
+              {company.name}
+            </span>
           ))}
         </div>
       </section>
@@ -100,5 +127,23 @@ function SettingsLink({
       <strong>{title}</strong>
       <p>{text}</p>
     </Link>
+  );
+}
+
+function StatusTile({
+  icon: Icon,
+  title,
+  text,
+}: {
+  icon: typeof ShieldCheck;
+  title: string;
+  text: string;
+}) {
+  return (
+    <article className="settings-status-tile">
+      <Icon size={18} />
+      <span>{title}</span>
+      <strong>{text}</strong>
+    </article>
   );
 }
