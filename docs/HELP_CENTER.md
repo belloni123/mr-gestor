@@ -16,8 +16,9 @@ Isso inclui:
 
 ## Onde atualizar
 
-- Conteudo visivel: `src/components/mr-gestor-app.tsx`, bloco `helpCards` e
-  secao `Central de Ajuda`.
+- Conteudo visivel principal: `src/app/help/page.tsx`.
+- Conteudo resumido do dashboard: `src/components/mr-gestor-app.tsx`, bloco
+  `helpCards` e secao `Central de Ajuda`.
 - Politica de produto: `docs/PDR.md`.
 - Regras de manutencao para agentes: `AGENTS.md`.
 - Documentos especificos quando aplicavel: `docs/RBAC.md`,
@@ -35,6 +36,11 @@ Cada atualizacao deve responder:
 
 ## Estado atual
 
+- A navegacao principal foi separada em paginas reais: dashboard, ajuda,
+  controladoria, empresas, clientes, integracoes, governanca e configuracoes.
+- A Central de Ajuda agora possui pagina propria em `/help`.
+- Configuracoes agora possui hub administrativo em `/settings`; troca de senha
+  continua em `/account/security`.
 - Login, 2FA, RBAC, troca de senha e administracao de usuarios estao ativos.
 - Banco PostgreSQL esta em producao no Coolify.
 - Dashboards ainda usam dados demonstrativos filtrados por permissao.

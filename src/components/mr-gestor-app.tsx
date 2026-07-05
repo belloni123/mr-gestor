@@ -32,7 +32,6 @@ import {
   Info,
   LayoutDashboard,
   LogOut,
-  LockKeyhole,
   Menu,
   Megaphone,
   PieChart as PieChartIcon,
@@ -63,22 +62,22 @@ type MrGestorAppProps = {
 };
 
 const navLinks = [
-  { label: "Dashboards", href: "#dashboards" },
-  { label: "Ajuda", href: "#ajuda" },
-  { label: "Controladoria", href: "#controladoria" },
-  { label: "Empresas", href: "#empresas" },
-  { label: "Integracoes", href: "#integracoes" },
+  { label: "Dashboards", href: "/" },
+  { label: "Ajuda", href: "/help" },
+  { label: "Controladoria", href: "/controladoria" },
+  { label: "Empresas", href: "/companies" },
+  { label: "Integracoes", href: "/integrations" },
 ];
 
 const moduleItems: ModuleItem[] = [
-  { label: "Dashboards", icon: LayoutDashboard, href: "#dashboards" },
-  { label: "Ajuda", icon: BookOpen, href: "#ajuda" },
-  { label: "Controladoria", icon: FileChartColumnIncreasing, href: "#controladoria" },
-  { label: "Empresas", icon: Building2, href: "#empresas" },
-  { label: "Clientes", icon: Users, href: "#clientes" },
-  { label: "Integracoes", icon: DatabaseZap, href: "#integracoes" },
-  { label: "Governanca", icon: ShieldCheck, href: "#governanca" },
-  { label: "Acessos", icon: LockKeyhole, href: "#acessos" },
+  { label: "Dashboards", icon: LayoutDashboard, href: "/" },
+  { label: "Ajuda", icon: BookOpen, href: "/help" },
+  { label: "Controladoria", icon: FileChartColumnIncreasing, href: "/controladoria" },
+  { label: "Empresas", icon: Building2, href: "/companies" },
+  { label: "Clientes", icon: Users, href: "/clients" },
+  { label: "Integracoes", icon: DatabaseZap, href: "/integrations" },
+  { label: "Governanca", icon: ShieldCheck, href: "/governance" },
+  { label: "Ajustes", icon: Settings, href: "/settings" },
 ];
 
 const views: { id: DashboardView; label: string; icon: typeof LayoutDashboard }[] = [
@@ -286,7 +285,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
     <div className="mr-app">
       <header className="global-nav">
         <div className="global-nav-inner">
-          <a className="brand-mark" href="#top" aria-label="MR Gestão inicio">
+          <a className="brand-mark" href="/" aria-label="MR Gestão inicio">
             <img src="/brand/mr-gestao-mark.svg" alt="" />
             <span>MR Gestão</span>
           </a>
@@ -307,7 +306,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
                 <UserCog size={17} />
               </a>
             ) : null}
-            <a className="icon-button" href="/account/security" aria-label="Seguranca da conta" title="Seguranca da conta">
+            <a className="icon-button" href="/settings" aria-label="Configuracoes" title="Configuracoes">
               <Settings size={17} />
             </a>
             <button
@@ -369,7 +368,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
               <input placeholder="Buscar modulos, empresas e ajuda" />
             </label>
             <div className="quick-links">
-              {[...navLinks, { label: "Seguranca", href: "/account/security" }].map((item) => (
+              {[...navLinks, { label: "Configuracoes", href: "/settings" }].map((item) => (
                 <a href={item.href} key={item.href} onClick={handleSectionClick}>
                   {item.label}
                 </a>
@@ -409,7 +408,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
                 </a>
               ))}
               {user.role === "SUPER_ADMIN" ? <a href="/admin/users">Usuarios</a> : null}
-              <a href="/account/security">Seguranca</a>
+              <a href="/settings">Configuracoes</a>
               <button onClick={logout} type="button">
                 Sair
               </button>
@@ -446,7 +445,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           {moduleItems.map((item) => {
             const Icon = item.icon;
             return (
-              <a className="rail-item" href={item.href} key={item.label} title={item.label}>
+              <a className={item.href === "/" ? "rail-item active" : "rail-item"} href={item.href} key={item.label} title={item.label}>
                 <Icon size={19} />
                 <span>{item.label}</span>
               </a>

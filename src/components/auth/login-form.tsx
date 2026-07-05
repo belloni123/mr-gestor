@@ -40,8 +40,8 @@ export function LoginForm() {
       <img className="auth-logo-lockup" src="/brand/mr-gestao-logo.svg" alt="MR Gestão" />
       <div className="auth-heading">
         <span>Portal seguro</span>
-        <h1>MR Gestão</h1>
-        <p>Acesse com senha e dupla autenticacao.</p>
+        <h1>Bem-vindo de volta</h1>
+        <p>Acesse seu painel de gestao com senha e dupla autenticacao.</p>
       </div>
 
       <label>

@@ -19,7 +19,7 @@ export default async function AccountSecurityPage({ searchParams }: AccountSecur
     <main className="settings-page">
       <section className="settings-shell">
         <div className="settings-topbar">
-          <Link href="/">Voltar ao dashboard</Link>
+          <Link href="/settings">Voltar as configuracoes</Link>
           <strong>{user.name}</strong>
         </div>
 

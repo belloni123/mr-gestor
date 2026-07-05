@@ -37,7 +37,7 @@ export default async function AdminUsersPage() {
     <main className="settings-page">
       <section className="settings-shell admin-shell">
         <div className="settings-topbar">
-          <Link href="/">Voltar ao dashboard</Link>
+          <Link href="/settings">Voltar as configuracoes</Link>
           <strong>Administracao de usuarios</strong>
         </div>
 
