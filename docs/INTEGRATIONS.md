@@ -1,6 +1,6 @@
 # Integrações - Conta Azul e Asaas
 
-Última revisão: 2026-07-04.
+Última revisão: 2026-07-07.
 
 Este documento consolida a leitura inicial das documentações oficiais da Conta
 Azul e do Asaas para orientar a implementação das integrações reais no MR
@@ -20,6 +20,9 @@ sincronização, nova credencial, novo webhook ou alteração operacional releva
 Fontes oficiais estudadas:
 
 - https://developers.contaazul.com/introduction.md
+- https://developers.contaazul.com/requestingcode
+- https://developers.contaazul.com/authorize-multiple-clients
+- https://developers.contaazul.com/renewingaccesstoken
 - https://developers.contaazul.com/minimumrequirements
 - https://developers.contaazul.com/aboutapis
 - https://developers.contaazul.com/faq
@@ -57,6 +60,32 @@ Implicação para o MR Gestor:
 - O refresh token deve ser tratado no servidor, nunca no navegador.
 - Uma falha `invalid_grant` deve marcar a conexão como "reautorização
   necessária".
+
+### OAuth implementado no MR Gestor
+
+Implementado em 2026-07-07:
+
+- Botão "Conectar Conta Azul" em cada empresa cadastrada.
+- Rota `POST /api/integrations/conta-azul/connect` para iniciar a autorização.
+- Rota `GET /api/integrations/conta-azul/callback` para receber `code` e
+  `state`.
+- Validação de `state` na sessão para reduzir risco de CSRF.
+- Troca do `authorization_code` por `access_token` e `refresh_token` no
+  endpoint oficial `https://auth.contaazul.com/oauth2/token`.
+- Armazenamento criptografado por empresa em `CompanyIntegrationCredential`.
+- Auditoria da conexão sem registrar token, refresh token, `client_id` ou
+  `client_secret`.
+
+Variáveis necessárias em produção:
+
+- `CONTA_AZUL_CLIENT_ID`
+- `CONTA_AZUL_CLIENT_SECRET`
+- `CONTA_AZUL_REDIRECT_URI`
+- `CONTA_AZUL_ENVIRONMENT`
+
+URL de callback atual:
+
+`https://gestao.nofrontscale.com.br/api/integrations/conta-azul/callback`
 
 ### Sincronização
 

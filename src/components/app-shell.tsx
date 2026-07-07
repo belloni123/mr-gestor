@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Bell,
@@ -81,15 +82,15 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
     <div className="mr-app">
       <header className="global-nav">
         <div className="global-nav-inner">
-          <a className="brand-mark" href="/" aria-label="MR Gestão início">
+          <Link className="brand-mark" href="/" aria-label="MR Gestão início">
             <img src="/brand/mr-gestao-mark.svg" alt="" />
             <span>MR Gestão</span>
-          </a>
+          </Link>
           <nav className="global-links" aria-label="Navegação principal">
             {topLinks.map((item) => (
-              <a className={isActivePath(pathname, item.href) ? "active" : undefined} href={item.href} key={item.href}>
+              <Link className={isActivePath(pathname, item.href) ? "active" : undefined} href={item.href} key={item.href}>
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="nav-actions">
@@ -98,13 +99,13 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
               <strong>{user.name}</strong>
             </div>
             {user.role === "SUPER_ADMIN" ? (
-              <a className="icon-button" href="/admin/users" aria-label="Administrar usuários" title="Administrar usuários">
+              <Link className="icon-button" href="/admin/users" aria-label="Administrar usuários" title="Administrar usuários">
                 <UserCog size={17} />
-              </a>
+              </Link>
             ) : null}
-            <a className="icon-button" href="/settings" aria-label="Configurações" title="Configurações">
+            <Link className="icon-button" href="/settings" aria-label="Configurações" title="Configurações">
               <Settings size={17} />
-            </a>
+            </Link>
             <button
               className="icon-button"
               onClick={() => {
@@ -166,9 +167,9 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
             </label>
             <div className="quick-links">
               {visibleModules.map((item) => (
-                <a href={item.href} key={item.href} onClick={() => setSearchOpen(false)}>
+                <Link href={item.href} key={item.href} onClick={() => setSearchOpen(false)}>
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -188,14 +189,14 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
               </button>
             </div>
             <div className="notification-stack">
-              <a href="/integrations">
+              <Link href="/integrations">
                 <strong>Integrações em preparação</strong>
                 <span>Asaas e Conta Azul seguem em modo demonstrativo.</span>
-              </a>
-              <a href="/help">
+              </Link>
+              <Link href="/help">
                 <strong>Central de ajuda ampliada</strong>
                 <span>Guias operacionais agora ficam em página própria.</span>
-              </a>
+              </Link>
             </div>
           </div>
         ) : null}
@@ -204,9 +205,9 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
           <div className="mobile-menu-panel" role="dialog" aria-label="Menu principal">
             <div className="mobile-menu-grid">
               {visibleModules.map((item) => (
-                <a href={item.href} key={item.href}>
+                <Link href={item.href} key={item.href}>
                   {item.label}
-                </a>
+                </Link>
               ))}
               <button onClick={logout} type="button">
                 Sair
@@ -232,7 +233,7 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
           {visibleModules.map((item) => {
             const Icon = item.icon;
             return (
-              <a
+              <Link
                 className={isActivePath(pathname, item.href) ? "rail-item active" : "rail-item"}
                 href={item.href}
                 key={item.href}
@@ -240,7 +241,7 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
               >
                 <Icon size={19} />
                 <span>{item.label}</span>
-              </a>
+              </Link>
             );
           })}
         </aside>

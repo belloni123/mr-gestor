@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { Building2, KeyRound, PlugZap, RefreshCcw, Save } from "lucide-react";
+import { Building2, KeyRound, PlugZap, RefreshCcw, Save, ShieldCheck } from "lucide-react";
 
 import {
   createCompanyAction,
@@ -217,6 +217,24 @@ function IntegrationCredentialForm({
           <span>{credential?.refreshLastFour ? `Refresh termina em ${credential.refreshLastFour}` : "Refresh token pendente"}</span>
         ) : null}
       </div>
+
+      {provider === "CONTA_AZUL" ? (
+        <div className="oauth-callout">
+          <div>
+            <strong>OAuth recomendado</strong>
+            <p>Conecte esta empresa diretamente pela autorização oficial da Conta Azul.</p>
+          </div>
+          <button
+            className="secondary-action oauth-action"
+            formAction="/api/integrations/conta-azul/connect"
+            formMethod="post"
+            type="submit"
+          >
+            <ShieldCheck size={15} />
+            Conectar Conta Azul
+          </button>
+        </div>
+      ) : null}
 
       <div className="form-grid two">
         <label>

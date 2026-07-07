@@ -13,9 +13,16 @@ export type PendingMfa = {
   attempts?: number;
 };
 
+export type PendingContaAzulOAuth = {
+  companyId: string;
+  state: string;
+  issuedAt: number;
+};
+
 export type SessionData = {
   user?: AuthSessionUser;
   pendingMfa?: PendingMfa;
+  pendingContaAzulOAuth?: PendingContaAzulOAuth;
 };
 
 export function getSessionOptions() {

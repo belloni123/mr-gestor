@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import {
   Area,
   AreaChart,
@@ -285,15 +286,15 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
     <div className="mr-app">
       <header className="global-nav">
         <div className="global-nav-inner">
-          <a className="brand-mark" href="/" aria-label="MR Gestão início">
+          <Link className="brand-mark" href="/" aria-label="MR Gestão início">
             <img src="/brand/mr-gestao-mark.svg" alt="" />
             <span>MR Gestão</span>
-          </a>
+          </Link>
           <nav className="global-links" aria-label="Navegação principal">
             {navLinks.map((item) => (
-              <a href={item.href} key={item.href}>
+              <Link href={item.href} key={item.href}>
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="nav-actions">
@@ -302,13 +303,13 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
               <strong>{user.name}</strong>
             </div>
             {user.role === "SUPER_ADMIN" ? (
-              <a className="icon-button" href="/admin/users" aria-label="Administrar usuários" title="Administrar usuários">
+              <Link className="icon-button" href="/admin/users" aria-label="Administrar usuários" title="Administrar usuários">
                 <UserCog size={17} />
-              </a>
+              </Link>
             ) : null}
-            <a className="icon-button" href="/settings" aria-label="Configurações" title="Configurações">
+            <Link className="icon-button" href="/settings" aria-label="Configurações" title="Configurações">
               <Settings size={17} />
-            </a>
+            </Link>
             <button
               className="icon-button"
               onClick={() => {
@@ -369,9 +370,9 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
             </label>
             <div className="quick-links">
               {[...navLinks, { label: "Configurações", href: "/settings" }].map((item) => (
-                <a href={item.href} key={item.href} onClick={handleSectionClick}>
+                <Link href={item.href} key={item.href} onClick={handleSectionClick}>
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -403,12 +404,12 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           <div className="mobile-menu-panel" role="dialog" aria-label="Menu principal">
             <div className="mobile-menu-grid">
               {navLinks.map((item) => (
-                <a href={item.href} key={item.href} onClick={handleSectionClick}>
+                <Link href={item.href} key={item.href} onClick={handleSectionClick}>
                   {item.label}
-                </a>
+                </Link>
               ))}
-              {user.role === "SUPER_ADMIN" ? <a href="/admin/users">Usuários</a> : null}
-              <a href="/settings">Configurações</a>
+              {user.role === "SUPER_ADMIN" ? <Link href="/admin/users">Usuários</Link> : null}
+              <Link href="/settings">Configurações</Link>
               <button onClick={logout} type="button">
                 Sair
               </button>
@@ -445,10 +446,10 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
           {moduleItems.map((item) => {
             const Icon = item.icon;
             return (
-              <a className={item.href === "/" ? "rail-item active" : "rail-item"} href={item.href} key={item.label} title={item.label}>
+              <Link className={item.href === "/" ? "rail-item active" : "rail-item"} href={item.href} key={item.label} title={item.label}>
                 <Icon size={19} />
                 <span>{item.label}</span>
-              </a>
+              </Link>
             );
           })}
         </aside>

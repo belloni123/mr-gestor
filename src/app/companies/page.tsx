@@ -9,7 +9,13 @@ import { getPrisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
-export default async function CompaniesPage() {
+type CompaniesPageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function CompaniesPage({ searchParams }: CompaniesPageProps) {
+  const params = searchParams ? await searchParams : {};
+  const contaAzulStatus = typeof params.contaAzul === "string" ? params.contaAzul : undefined;
   const { user } = await getProtectedPageContext();
   const isSuperAdmin = user.role === "SUPER_ADMIN";
   const prisma = getPrisma();
@@ -53,6 +59,8 @@ export default async function CompaniesPage() {
       </section>
 
       {isSuperAdmin ? <CreateCompanyForm /> : null}
+
+      {contaAzulStatus ? <ContaAzulOAuthNotice status={contaAzulStatus} /> : null}
 
       <section className="company-page-list">
         {registeredCompanies.map((company) => {
@@ -106,4 +114,24 @@ function formatCredentialStatus(status?: string) {
   if (status === "READY") return "Pronto";
   if (status === "ERROR") return "Erro";
   return "Pendente";
+}
+
+function ContaAzulOAuthNotice({ status }: { status: string }) {
+  const success = status === "connected";
+  const messages: Record<string, string> = {
+    connected: "Conta Azul conectada com sucesso. Os tokens foram salvos criptografados para a empresa selecionada.",
+    denied: "Autorização da Conta Azul cancelada ou negada.",
+    error: "Não foi possível concluir a conexão com a Conta Azul. Confira a URL de redirecionamento e tente novamente.",
+    "inactive-company": "A empresa selecionada está inativa.",
+    "invalid-state": "A sessão de autorização expirou ou ficou inválida. Inicie a conexão novamente.",
+    "missing-company": "Empresa não encontrada para iniciar a conexão.",
+    "missing-config": "As credenciais OAuth da Conta Azul ainda não estão configuradas no ambiente.",
+    "missing-session": "A sessão de autorização não foi encontrada. Inicie a conexão novamente.",
+  };
+
+  return (
+    <section className={success ? "secure-result success" : "secure-result error"}>
+      <span>{messages[status] ?? messages.error}</span>
+    </section>
+  );
 }

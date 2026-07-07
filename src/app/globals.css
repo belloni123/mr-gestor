@@ -859,6 +859,35 @@ a {
   gap: 4px;
 }
 
+.oauth-callout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(0, 102, 204, 0.18);
+  border-radius: 10px;
+  padding: 12px;
+  background: rgba(0, 102, 204, 0.06);
+}
+
+.oauth-callout strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.oauth-callout p {
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.oauth-action {
+  white-space: nowrap;
+}
+
 .secure-result {
   display: grid;
   gap: 8px;
@@ -1792,6 +1821,7 @@ td:nth-child(5) {
   .company-page-metrics,
   .company-page-footer,
   .integration-credential-grid,
+  .oauth-callout,
   .form-grid.two {
     grid-template-columns: 1fr;
   }
