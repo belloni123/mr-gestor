@@ -15,6 +15,24 @@ function safeNextPath(request: NextRequest) {
   return next;
 }
 
+function getPublicOrigin(request: NextRequest) {
+  const configuredUrl = process.env.APP_URL;
+
+  if (configuredUrl) {
+    return configuredUrl;
+  }
+
+  const forwardedHost = request.headers.get("x-forwarded-host");
+  const host = forwardedHost ?? request.headers.get("host");
+
+  if (host) {
+    const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0] ?? "https";
+    return `${forwardedProto}://${host}`;
+  }
+
+  return request.nextUrl.origin;
+}
+
 async function destroySession(request: NextRequest, message = "Logout realizado.") {
   const session = await getSession();
   const userId = session.user?.id;
@@ -34,7 +52,7 @@ async function destroySession(request: NextRequest, message = "Logout realizado.
 
 export async function GET(request: NextRequest) {
   await destroySession(request, "Sessão encerrada automaticamente.");
-  return NextResponse.redirect(new URL(safeNextPath(request), request.url));
+  return NextResponse.redirect(new URL(safeNextPath(request), getPublicOrigin(request)));
 }
 
 export async function POST(request: NextRequest) {
