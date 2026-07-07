@@ -55,6 +55,7 @@ export function toSessionUser(user: UserWithCompanies): AuthSessionUser {
     name: user.name,
     role: user.role,
     mustChangePassword: user.mustChangePassword,
+    passwordVersion: user.passwordVersion,
     companies: user.companies
       .filter((item) => item.company)
       .map((item) => ({
@@ -99,6 +100,19 @@ export async function requireSessionUser() {
   const session = await getSession();
 
   if (!session.user) {
+    redirect("/login");
+  }
+
+  const freshUser = await getPrisma().user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      isActive: true,
+      passwordVersion: true,
+    },
+  });
+
+  if (!freshUser?.isActive || freshUser.passwordVersion !== session.user.passwordVersion) {
+    session.destroy();
     redirect("/login");
   }
 

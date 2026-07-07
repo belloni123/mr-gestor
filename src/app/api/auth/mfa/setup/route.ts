@@ -13,6 +13,8 @@ const verifySchema = z.object({
   token: z.string().min(6).max(10),
 });
 
+const MFA_ATTEMPT_LIMIT = 5;
+
 export async function GET() {
   const session = await getSession();
 
@@ -55,6 +57,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (!verifyTotp(parsed.data.token, session.pendingMfa.secret)) {
+    session.pendingMfa.attempts = (session.pendingMfa.attempts ?? 0) + 1;
     await auditLog({
       userId: session.pendingMfa.userId,
       action: AuditAction.LOGIN_FAILURE,
@@ -62,6 +65,13 @@ export async function POST(request: NextRequest) {
       ip,
       userAgent,
     });
+
+    if (session.pendingMfa.attempts >= MFA_ATTEMPT_LIMIT) {
+      session.destroy();
+      return NextResponse.json({ error: "Muitas tentativas inválidas. Faça login novamente." }, { status: 429 });
+    }
+
+    await session.save();
     return NextResponse.json({ error: "Código inválido." }, { status: 401 });
   }
 

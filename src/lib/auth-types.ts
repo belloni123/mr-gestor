@@ -13,5 +13,6 @@ export type AuthSessionUser = {
   name: string;
   role: SessionRole;
   mustChangePassword: boolean;
+  passwordVersion: number;
   companies: SessionCompany[];
 };

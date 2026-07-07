@@ -24,6 +24,13 @@ O projeto foi preparado para operar como portal sigiloso: login obrigatório, se
 - Todo usuário precisa concluir 2FA no primeiro acesso.
 - Usuários criados por seed/admin entram com senha temporária e são obrigados a trocá-la.
 
+## Empresas e integrações
+
+- Empresas reais são cadastradas em `/companies` pelo super admin.
+- Cada empresa tem `code` interno único e token interno criptografado.
+- Credenciais de Asaas e Conta Azul são salvas por empresa, ambiente e provedor.
+- Tokens já salvos aparecem apenas mascarados pelos quatro últimos caracteres.
+
 Detalhes em [docs/RBAC.md](docs/RBAC.md).
 
 O PDR do produto, benchmark e roadmap estão em [docs/PDR.md](docs/PDR.md).

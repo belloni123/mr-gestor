@@ -170,16 +170,37 @@ Pontos operacionais importantes:
 - Headers como `RateLimit-Limit`, `RateLimit-Remaining` e `RateLimit-Reset`
   devem orientar backoff e concorrência.
 
-## Modelo recomendado de dados
+## Modelo atual de dados
 
-Tabelas recomendadas para a fase de dados reais:
+Implementado em 2026-07-07:
 
-- `IntegrationConnection`
+- `Company`
+  - `code`: código interno único usado para conciliação e identificação operacional.
+  - `integrationTokenEncrypted`: token interno criptografado por empresa.
+  - `integrationTokenLastFour`: apenas os quatro últimos caracteres para conferência visual.
+  - `integrationTokenUpdatedAt`: data da última geração/rotação do token.
+
+- `CompanyIntegrationCredential`
   - `companyId`
   - `provider`: `ASAAS` ou `CONTA_AZUL`
-  - `environment`: `SANDBOX`, `DEVELOPMENT` ou `PRODUCTION`
-  - `status`: `PENDING`, `CONNECTED`, `ERROR`, `REAUTH_REQUIRED`
-  - `encryptedCredentials`
+  - `environment`: `SANDBOX` ou `PRODUCTION`
+  - `credentialEncrypted`: API key, access token ou token primário criptografado.
+  - `credentialLastFour`: apenas os quatro últimos caracteres para conferência visual.
+  - `refreshEncrypted`: refresh token criptografado quando o provedor exigir.
+  - `refreshLastFour`: apenas os quatro últimos caracteres do refresh token.
+  - `externalAccountId`: identificador externo/tenant quando existir.
+  - `status`: `PENDING`, `READY`, `CONNECTED` ou `ERROR`.
+  - `lastSyncedAt`
+
+As credenciais são cadastradas pelo super admin em `/companies`. Tokens reais
+nunca devem aparecer no HTML depois de salvos; quando o sistema gera token
+interno automaticamente, ele é exibido apenas uma vez.
+
+Tabelas recomendadas para a próxima fase de dados reais:
+
+- `IntegrationConnection`
+  - Pode evoluir ou substituir `CompanyIntegrationCredential` se precisarmos
+    guardar escopos, erros detalhados e múltiplas conexões por empresa/provedor.
   - `scopes`
   - `lastSyncedAt`
   - `lastError`
@@ -257,6 +278,14 @@ Fluxo Conta Azul:
 - Separar credenciais de Sandbox/Desenvolvimento e Produção.
 
 ## Primeira entrega recomendada
+
+- Cadastrar empresas reais pelo painel.
+- Definir `code` único para cada empresa.
+- Gerar ou informar token interno por empresa.
+- Cadastrar credenciais de Sandbox primeiro.
+- Implementar fluxo OAuth da Conta Azul por empresa.
+- Implementar teste de conectividade sem imprimir tokens.
+- Criar tabelas normalizadas para dados financeiros antes de alimentar dashboards.
 
 1. Criar tabelas de conexão, eventos e sync runs.
 2. Criar tela de Integrações por empresa para super admin.

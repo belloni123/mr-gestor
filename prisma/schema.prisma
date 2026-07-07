@@ -22,6 +22,20 @@ enum AuditAction {
   USER_CREATED
   USER_UPDATED
   PASSWORD_RESET
+  COMPANY_CREATED
+  COMPANY_UPDATED
+  COMPANY_TOKEN_ROTATED
+  INTEGRATION_CREDENTIAL_UPDATED
+}
+
+enum IntegrationProvider {
+  ASAAS
+  CONTA_AZUL
+}
+
+enum IntegrationEnvironment {
+  SANDBOX
+  PRODUCTION
 }
 
 model User {
@@ -48,16 +62,43 @@ model User {
 }
 
 model Company {
-  id        String        @id @default(cuid())
-  slug      String        @unique
-  name      String
-  legalName String?
-  isActive  Boolean       @default(true)
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  users     UserCompany[]
+  id                         String                         @id @default(cuid())
+  slug                       String                         @unique
+  code                       String?                        @unique
+  name                       String
+  legalName                  String?
+  integrationTokenEncrypted  String?
+  integrationTokenLastFour   String?
+  integrationTokenUpdatedAt  DateTime?
+  isActive                   Boolean                        @default(true)
+  createdAt                  DateTime                       @default(now())
+  updatedAt                  DateTime                       @updatedAt
+  users                      UserCompany[]
+  integrationCredentials     CompanyIntegrationCredential[]
 
   @@index([isActive])
+  @@index([code])
+}
+
+model CompanyIntegrationCredential {
+  id                  String                 @id @default(cuid())
+  companyId           String
+  provider            IntegrationProvider
+  environment         IntegrationEnvironment @default(SANDBOX)
+  credentialEncrypted String?
+  credentialLastFour  String?
+  refreshEncrypted    String?
+  refreshLastFour     String?
+  externalAccountId   String?
+  status              String                 @default("PENDING")
+  lastSyncedAt        DateTime?
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  company             Company                @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, provider])
+  @@index([provider])
+  @@index([status])
 }
 
 model UserCompany {

@@ -31,8 +31,11 @@
 
 ## Integrações externas
 
+- [ ] Cada empresa real tem `code` único definido no painel.
+- [ ] Cada empresa real tem token interno próprio e rotacionável.
 - [ ] Criptografar API keys, access tokens e refresh tokens em repouso.
 - [ ] Nunca imprimir credenciais de Asaas ou Conta Azul em logs.
+- [ ] Exibir somente quatro últimos caracteres de tokens já salvos.
 - [ ] Separar credenciais de Sandbox/Desenvolvimento e Produção.
 - [ ] Validar token de webhook Asaas pelo header `asaas-access-token`.
 - [ ] Processar webhooks com idempotência.

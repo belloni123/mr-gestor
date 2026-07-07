@@ -6,11 +6,13 @@ const prisma = new PrismaClient();
 const companies = [
   {
     slug: "b16",
+    code: "B16",
     name: "Agencia B16",
     legalName: "Agencia B16 Comunicacao Ltda.",
   },
   {
     slug: "maestro",
+    code: "MAESTRO",
     name: "Maestro Tiago Santos",
     legalName: "Tiago Santos Producoes Musicais",
   },

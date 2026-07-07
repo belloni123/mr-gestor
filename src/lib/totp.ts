@@ -8,14 +8,22 @@ export function generateTotpSecret() {
 }
 
 export function verifyTotp(token: string, secret: string) {
-  return verifySync({
+  const sanitized = token.replace(/\s+/g, "");
+
+  if (!/^\d{6}$/.test(sanitized)) {
+    return false;
+  }
+
+  const result = verifySync({
     strategy: "totp",
-    token: token.replace(/\s+/g, ""),
+    token: sanitized,
     secret,
     period: 30,
     digits: 6,
     epochTolerance: 1,
   });
+
+  return result.valid === true;
 }
 
 export async function getTotpEnrollmentPayload(email: string, secret: string) {
