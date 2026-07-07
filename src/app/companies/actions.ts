@@ -83,6 +83,17 @@ export async function createCompanyAction(
     return { ok: false, message: "Código e slug precisam ter pelo menos 2 caracteres." };
   }
 
+  const existing = await getPrisma().company.findFirst({
+    where: {
+      OR: [{ code }, { slug }],
+    },
+    select: { id: true },
+  });
+
+  if (existing) {
+    return { ok: false, message: "Já existe empresa com este código ou slug." };
+  }
+
   try {
     const company = await getPrisma().company.create({
       data: {
@@ -137,6 +148,20 @@ export async function updateCompanyAction(
 
   if (!companyId || !name || !code || !slug) {
     return { ok: false, message: "Preencha nome, código e slug." };
+  }
+
+  const existing = await getPrisma().company.findFirst({
+    where: {
+      id: {
+        not: companyId,
+      },
+      OR: [{ code }, { slug }],
+    },
+    select: { id: true },
+  });
+
+  if (existing) {
+    return { ok: false, message: "Já existe outra empresa com este código ou slug." };
   }
 
   try {

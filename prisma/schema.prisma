@@ -64,7 +64,7 @@ model User {
 model Company {
   id                         String                         @id @default(cuid())
   slug                       String                         @unique
-  code                       String?                        @unique
+  code                       String?
   name                       String
   legalName                  String?
   integrationTokenEncrypted  String?
