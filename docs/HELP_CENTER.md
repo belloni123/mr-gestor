@@ -36,16 +36,36 @@ Cada atualização deve responder:
 
 ## Estado atual
 
-- A navegação principal foi separada em páginas reais: dashboard, ajuda,
-  controladoria, empresas, clientes, integrações, governança e configurações.
-- A Central de Ajuda agora possui página própria em `/help`.
-- Configurações agora possui hub administrativo em `/settings`; troca de senha
+- A navegação principal foi separada em páginas reais e reorganizada em grupos:
+  Uso diário, Estratégia, CRM & Marketing e Organização.
+- Novos módulos inspirados no Hub Estratégico de referência:
+  - `/daily` (Meu dia): prioridades do dia por usuário (localStorage do
+    navegador), atalhos externos e internos, mini calendário com feriados
+    nacionais de 2026 e alertas das empresas autorizadas.
+  - `/strategy` (Estratégia): missão, visão, cultura, ICP, política de
+    comunicação, 7 pilares estratégicos com progresso, OKRs do trimestre e as
+    4 fases do planejamento.
+  - `/roadmap` (Cronograma): Gantt semanal Jul–Dez 2026 por departamento, com
+    responsável e percentual de avanço por ação.
+  - `/crm` (CRM & Vendas): KPIs comerciais, funil por estágio, meta vs
+    realizado, tabela de oportunidades e atividades da semana. Oportunidades e
+    atividades são filtradas no servidor pelas empresas do usuário.
+  - `/marketing` (Marketing): funil de maturidade, investimento vs retorno por
+    canal, planejamento de conteúdo do trimestre e OKRs de marketing.
+  - `/departments` (Departamentos): missão, responsável, indicadores, projetos
+    e ritual semanal de cada time.
+- Todos os módulos novos usam dados demonstrativos, prontos para receber dados
+  reais na fase de integrações.
+- A busca rápida do topo filtra os módulos por nome e descrição.
+- A Central de Ajuda possui página própria em `/help`, com seção de novidades.
+- Configurações possui hub administrativo em `/settings`; troca de senha
   continua em `/account/security`.
-- Login usa fundo fotográfico local, card com efeito premium e animação de
-  entrada respeitando preferência de movimento reduzido.
-- Configurações recebeu reforço iconográfico para atalhos, status de acesso e
-  empresas permitidas.
 - Login, 2FA, RBAC, troca de senha e administração de usuários estão ativos.
+- Reforços de segurança desta versão: limite de 5 tentativas de código 2FA,
+  invalidação de sessões antigas após troca de senha ou desativação de
+  usuário, redirecionamento imediato de visitantes sem sessão (proxy),
+  CSP sem `unsafe-eval` em produção e bloqueio de indexação
+  (robots + X-Robots-Tag).
 - Banco PostgreSQL está em produção no Coolify.
 - Dashboards ainda usam dados demonstrativos filtrados por permissão.
 - Asaas e Conta Azul aparecem como status operacional, mas a sincronização real

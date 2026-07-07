@@ -2,7 +2,7 @@ import { AuditAction } from "@prisma/client";
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 
-import { auditLog, isMfaPendingExpired, setAuthenticatedSession } from "@/lib/auth";
+import { auditLog, isMfaPendingExpired, MFA_ATTEMPT_LIMIT, setAuthenticatedSession } from "@/lib/auth";
 import { decryptSecret } from "@/lib/crypto";
 import { getPrisma } from "@/lib/prisma";
 import { getClientIp, getUserAgent } from "@/lib/request";
@@ -43,13 +43,26 @@ export async function POST(request: NextRequest) {
   }
 
   if (!verifyTotp(parsed.data.token, decryptSecret(user.mfaSecretEncrypted))) {
+    const attempts = (session.pendingMfa.attempts ?? 0) + 1;
+
     await auditLog({
       userId: user.id,
       action: AuditAction.LOGIN_FAILURE,
-      message: "Código TOTP inválido.",
+      message: `Código TOTP inválido (tentativa ${attempts} de ${MFA_ATTEMPT_LIMIT}).`,
       ip,
       userAgent,
     });
+
+    if (attempts >= MFA_ATTEMPT_LIMIT) {
+      session.destroy();
+      return NextResponse.json(
+        { error: "Muitas tentativas de 2FA. Faça login novamente." },
+        { status: 429 },
+      );
+    }
+
+    session.pendingMfa.attempts = attempts;
+    await session.save();
     return NextResponse.json({ error: "Código inválido." }, { status: 401 });
   }
 

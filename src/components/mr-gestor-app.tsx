@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import {
   Area,
   AreaChart,
@@ -18,8 +19,6 @@ import {
 import {
   ArrowUpRight,
   Bell,
-  BookOpen,
-  Building2,
   CalendarDays,
   Check,
   CheckCircle2,
@@ -38,47 +37,22 @@ import {
   RefreshCcw,
   Search,
   Settings,
-  ShieldCheck,
   TrendingUp,
   UserCog,
-  Users,
   WalletCards,
   X,
 } from "lucide-react";
 import type { AuthSessionUser } from "@/lib/auth-types";
 import type { Alert, DashboardCompany, FinancialItem } from "@/lib/dashboard-types";
+import { flattenNavigation, navigationGroups, topLinks } from "@/lib/navigation";
 
 type Company = DashboardCompany;
 type DashboardView = "executivo" | "controladoria" | "receber" | "pagar";
-type ModuleItem = {
-  label: string;
-  icon: typeof LayoutDashboard;
-  href: string;
-};
 
 type MrGestorAppProps = {
   companies: Company[];
   user: AuthSessionUser;
 };
-
-const navLinks = [
-  { label: "Dashboards", href: "/" },
-  { label: "Ajuda", href: "/help" },
-  { label: "Controladoria", href: "/controladoria" },
-  { label: "Empresas", href: "/companies" },
-  { label: "Integrações", href: "/integrations" },
-];
-
-const moduleItems: ModuleItem[] = [
-  { label: "Dashboards", icon: LayoutDashboard, href: "/" },
-  { label: "Ajuda", icon: BookOpen, href: "/help" },
-  { label: "Controladoria", icon: FileChartColumnIncreasing, href: "/controladoria" },
-  { label: "Empresas", icon: Building2, href: "/companies" },
-  { label: "Clientes", icon: Users, href: "/clients" },
-  { label: "Integrações", icon: DatabaseZap, href: "/integrations" },
-  { label: "Governança", icon: ShieldCheck, href: "/governance" },
-  { label: "Ajustes", icon: Settings, href: "/settings" },
-];
 
 const views: { id: DashboardView; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "executivo", label: "Executivo", icon: LayoutDashboard },
@@ -107,7 +81,7 @@ const helpCards = [
   },
   {
     title: "Novidades do MR Gestor",
-    text: "Toda nova inteligência, tela ou automação deve ser registrada aqui antes de ser apresentada ao cliente.",
+    text: "Novos módulos: Meu dia, Estratégia, Cronograma, CRM & Vendas, Marketing e Departamentos — veja a Central de Ajuda.",
     icon: Megaphone,
   },
 ];
@@ -285,12 +259,12 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
     <div className="mr-app">
       <header className="global-nav">
         <div className="global-nav-inner">
-          <a className="brand-mark" href="/" aria-label="MR Gestão início">
+          <Link className="brand-mark" href="/" aria-label="MR Gestão início">
             <img src="/brand/mr-gestao-mark.svg" alt="" />
             <span>MR Gestão</span>
-          </a>
+          </Link>
           <nav className="global-links" aria-label="Navegação principal">
-            {navLinks.map((item) => (
+            {topLinks.map((item) => (
               <a href={item.href} key={item.href}>
                 {item.label}
               </a>
@@ -368,7 +342,7 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
               <input placeholder="Buscar módulos, empresas e ajuda" />
             </label>
             <div className="quick-links">
-              {[...navLinks, { label: "Configurações", href: "/settings" }].map((item) => (
+              {flattenNavigation(user.role === "SUPER_ADMIN").map((item) => (
                 <a href={item.href} key={item.href} onClick={handleSectionClick}>
                   {item.label}
                 </a>
@@ -402,13 +376,11 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
         {mobileMenuOpen ? (
           <div className="mobile-menu-panel" role="dialog" aria-label="Menu principal">
             <div className="mobile-menu-grid">
-              {navLinks.map((item) => (
+              {flattenNavigation(user.role === "SUPER_ADMIN").map((item) => (
                 <a href={item.href} key={item.href} onClick={handleSectionClick}>
                   {item.label}
                 </a>
               ))}
-              {user.role === "SUPER_ADMIN" ? <a href="/admin/users">Usuários</a> : null}
-              <a href="/settings">Configurações</a>
               <button onClick={logout} type="button">
                 Sair
               </button>
@@ -442,13 +414,27 @@ export function MrGestorApp({ companies, user }: MrGestorAppProps) {
 
       <main className="app-shell">
         <aside className="left-rail" aria-label="Módulos">
-          {moduleItems.map((item) => {
-            const Icon = item.icon;
+          {navigationGroups.map((group) => {
+            const items = group.items.filter((item) => !item.superAdminOnly || user.role === "SUPER_ADMIN");
+            if (!items.length) return null;
             return (
-              <a className={item.href === "/" ? "rail-item active" : "rail-item"} href={item.href} key={item.label} title={item.label}>
-                <Icon size={19} />
-                <span>{item.label}</span>
-              </a>
+              <div className="rail-group" key={group.label}>
+                <span className="rail-group-label">{group.label}</span>
+                {items.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      className={item.href === "/" ? "rail-item active" : "rail-item"}
+                      href={item.href}
+                      key={item.href}
+                      title={item.description}
+                    >
+                      <Icon size={19} />
+                      <span>{item.label}</span>
+                    </a>
+                  );
+                })}
+              </div>
             );
           })}
         </aside>

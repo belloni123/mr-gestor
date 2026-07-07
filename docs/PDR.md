@@ -82,6 +82,19 @@ Perfil futuro recomendado:
 
 ## Entregue nesta versão
 
+- Módulos de uso diário e estratégia inspirados no Hub Estratégico de
+  referência: Meu dia, Estratégia, Cronograma (Gantt), CRM & Vendas,
+  Marketing e Departamentos — todos com dados demonstrativos e navegação
+  agrupada.
+- CRM filtrado no servidor pelas empresas autorizadas de cada usuário.
+- Busca rápida funcional sobre os módulos do hub.
+- Limite de tentativas no 2FA (5 códigos incorretos encerram a sessão de
+  verificação).
+- Invalidação de sessões após troca de senha ou desativação de usuário
+  (verificação de `passwordVersion` e `isActive` no servidor).
+- Proxy de borda que redireciona visitantes sem cookie de sessão para o login.
+- CSP sem `unsafe-eval` em produção e bloqueio de indexação
+  (`robots.txt`, metadata e `X-Robots-Tag`).
 - Autenticação com senha, sessão segura e MFA TOTP.
 - Super admin inicial criado por seed.
 - Seed idempotente que não regrava senha em redeploy.

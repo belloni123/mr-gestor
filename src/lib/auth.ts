@@ -13,6 +13,8 @@ const IP_FAILURE_LIMIT = 20;
 const USER_FAILURE_LIMIT = 5;
 const LOCKOUT_MINUTES = 15;
 
+export const MFA_ATTEMPT_LIMIT = 5;
+
 type UserWithCompanies = User & {
   companies: Array<{
     canEdit: boolean;
@@ -55,6 +57,7 @@ export function toSessionUser(user: UserWithCompanies): AuthSessionUser {
     name: user.name,
     role: user.role,
     mustChangePassword: user.mustChangePassword,
+    passwordVersion: user.passwordVersion,
     companies: user.companies
       .filter((item) => item.company)
       .map((item) => ({
@@ -105,8 +108,29 @@ export async function requireSessionUser() {
   return session.user;
 }
 
+// Confere no banco se a sessão ainda vale: usuário ativo e senha não trocada
+// depois da emissão do cookie. Erros transitórios de banco não derrubam a
+// sessão; um mismatch explícito derruba.
+export async function isSessionUserFresh(user: AuthSessionUser) {
+  try {
+    const current = await getPrisma().user.findUnique({
+      where: { id: user.id },
+      select: { isActive: true, passwordVersion: true },
+    });
+
+    if (!current) return false;
+    return current.isActive && current.passwordVersion === (user.passwordVersion ?? -1);
+  } catch {
+    return true;
+  }
+}
+
 export async function requireSuperAdmin() {
   const user = await requireSessionUser();
+
+  if (!(await isSessionUserFresh(user))) {
+    redirect("/login");
+  }
 
   if (user.role !== "SUPER_ADMIN") {
     redirect("/");

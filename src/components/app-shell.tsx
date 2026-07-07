@@ -1,32 +1,12 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Bell,
-  BookOpen,
-  Building2,
-  DatabaseZap,
-  FileChartColumnIncreasing,
-  LayoutDashboard,
-  LogOut,
-  Menu,
-  Search,
-  Settings,
-  ShieldCheck,
-  UserCog,
-  Users,
-  X,
-} from "lucide-react";
+import { Bell, LogOut, Menu, Search, Settings, UserCog, X } from "lucide-react";
 
 import type { AuthSessionUser } from "@/lib/auth-types";
-
-type NavigationItem = {
-  label: string;
-  href: string;
-  icon: typeof LayoutDashboard;
-  superAdminOnly?: boolean;
-};
+import { flattenNavigation, isActivePath, navigationGroups, topLinks } from "@/lib/navigation";
 
 type AppShellProps = {
   user: AuthSessionUser;
@@ -37,36 +17,12 @@ type AppShellProps = {
   children: ReactNode;
 };
 
-const topLinks = [
-  { label: "Dashboards", href: "/" },
-  { label: "Ajuda", href: "/help" },
-  { label: "Controladoria", href: "/controladoria" },
-  { label: "Empresas", href: "/companies" },
-  { label: "Integrações", href: "/integrations" },
-];
-
-const moduleItems: NavigationItem[] = [
-  { label: "Dashboards", icon: LayoutDashboard, href: "/" },
-  { label: "Ajuda", icon: BookOpen, href: "/help" },
-  { label: "Controladoria", icon: FileChartColumnIncreasing, href: "/controladoria" },
-  { label: "Empresas", icon: Building2, href: "/companies" },
-  { label: "Clientes", icon: Users, href: "/clients" },
-  { label: "Integrações", icon: DatabaseZap, href: "/integrations" },
-  { label: "Governança", icon: ShieldCheck, href: "/governance" },
-  { label: "Usuários", icon: UserCog, href: "/admin/users", superAdminOnly: true },
-  { label: "Ajustes", icon: Settings, href: "/settings" },
-];
-
-function isActivePath(pathname: string, href: string) {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
 export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", actions, children }: AppShellProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   async function logout() {
     await fetch("/api/auth/logout", {
@@ -75,16 +31,25 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
     window.location.href = "/login";
   }
 
-  const visibleModules = moduleItems.filter((item) => !item.superAdminOnly || user.role === "SUPER_ADMIN");
+  const isSuperAdmin = user.role === "SUPER_ADMIN";
+  const visibleModules = flattenNavigation(isSuperAdmin);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const searchResults = normalizedQuery
+    ? visibleModules.filter(
+        (item) =>
+          item.label.toLowerCase().includes(normalizedQuery) ||
+          item.description.toLowerCase().includes(normalizedQuery),
+      )
+    : visibleModules;
 
   return (
     <div className="mr-app">
       <header className="global-nav">
         <div className="global-nav-inner">
-          <a className="brand-mark" href="/" aria-label="MR Gestão início">
+          <Link className="brand-mark" href="/" aria-label="MR Gestão início">
             <img src="/brand/mr-gestao-mark.svg" alt="" />
             <span>MR Gestão</span>
-          </a>
+          </Link>
           <nav className="global-links" aria-label="Navegação principal">
             {topLinks.map((item) => (
               <a className={isActivePath(pathname, item.href) ? "active" : undefined} href={item.href} key={item.href}>
@@ -94,10 +59,10 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
           </nav>
           <div className="nav-actions">
             <div className="account-pill">
-              <span>{user.role === "SUPER_ADMIN" ? "Super admin" : "Editor"}</span>
+              <span>{isSuperAdmin ? "Super admin" : "Editor"}</span>
               <strong>{user.name}</strong>
             </div>
-            {user.role === "SUPER_ADMIN" ? (
+            {isSuperAdmin ? (
               <a className="icon-button" href="/admin/users" aria-label="Administrar usuários" title="Administrar usuários">
                 <UserCog size={17} />
               </a>
@@ -153,23 +118,36 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
         </div>
 
         {searchOpen ? (
-          <div className="floating-panel search-panel" role="dialog" aria-label="Busca rapida">
+          <div className="floating-panel search-panel" role="dialog" aria-label="Busca rápida">
             <div className="panel-heading compact">
-              <span>Busca rapida</span>
+              <span>Busca rápida</span>
               <button className="icon-button light" onClick={() => setSearchOpen(false)} type="button" aria-label="Fechar busca">
                 <X size={16} />
               </button>
             </div>
             <label className="search-field">
               <Search size={16} />
-              <input placeholder="Buscar módulos, empresas e ajuda" />
+              <input
+                placeholder="Buscar módulos, empresas e ajuda"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                autoFocus
+              />
             </label>
             <div className="quick-links">
-              {visibleModules.map((item) => (
-                <a href={item.href} key={item.href} onClick={() => setSearchOpen(false)}>
+              {searchResults.map((item) => (
+                <a
+                  href={item.href}
+                  key={item.href}
+                  onClick={() => {
+                    setSearchOpen(false);
+                    setSearchQuery("");
+                  }}
+                >
                   {item.label}
                 </a>
               ))}
+              {!searchResults.length ? <span className="search-empty">Nada encontrado para “{searchQuery}”.</span> : null}
             </div>
           </div>
         ) : null}
@@ -188,13 +166,17 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
               </button>
             </div>
             <div className="notification-stack">
+              <a href="/daily">
+                <strong>Novo: módulo Meu dia</strong>
+                <span>Prioridades, atalhos, calendário e alertas em uma tela.</span>
+              </a>
+              <a href="/strategy">
+                <strong>Novo: Estratégia, CRM e Marketing</strong>
+                <span>O hub agora cobre o uso diário e a camada estratégica.</span>
+              </a>
               <a href="/integrations">
                 <strong>Integrações em preparação</strong>
                 <span>Asaas e Conta Azul seguem em modo demonstrativo.</span>
-              </a>
-              <a href="/help">
-                <strong>Central de ajuda ampliada</strong>
-                <span>Guias operacionais agora ficam em página própria.</span>
               </a>
             </div>
           </div>
@@ -229,18 +211,27 @@ export function AppShell({ user, title, subtitle, eyebrow = "MR Gestão", action
 
       <main className="app-shell">
         <aside className="left-rail" aria-label="Módulos">
-          {visibleModules.map((item) => {
-            const Icon = item.icon;
+          {navigationGroups.map((group) => {
+            const items = group.items.filter((item) => !item.superAdminOnly || isSuperAdmin);
+            if (!items.length) return null;
             return (
-              <a
-                className={isActivePath(pathname, item.href) ? "rail-item active" : "rail-item"}
-                href={item.href}
-                key={item.href}
-                title={item.label}
-              >
-                <Icon size={19} />
-                <span>{item.label}</span>
-              </a>
+              <div className="rail-group" key={group.label}>
+                <span className="rail-group-label">{group.label}</span>
+                {items.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      className={isActivePath(pathname, item.href) ? "rail-item active" : "rail-item"}
+                      href={item.href}
+                      key={item.href}
+                      title={item.description}
+                    >
+                      <Icon size={19} />
+                      <span>{item.label}</span>
+                    </a>
+                  );
+                })}
+              </div>
             );
           })}
         </aside>

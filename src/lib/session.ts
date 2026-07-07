@@ -10,6 +10,7 @@ export type PendingMfa = {
   purpose: "setup" | "verify";
   secret?: string;
   issuedAt: number;
+  attempts?: number;
 };
 
 export type SessionData = {

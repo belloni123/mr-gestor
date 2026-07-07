@@ -1,5 +1,22 @@
 # Security checklist
 
+## Controles ativos no código
+
+- [x] Sessão iron-session com cookie httpOnly, SameSite e secure em produção.
+- [x] MFA TOTP obrigatório com segredo criptografado (AES-256-GCM).
+- [x] Verificação de TOTP checa `result.valid === true`. O otplib v13 retorna
+      um objeto (`{ valid, ... }`), então retornar o objeto direto tornaria
+      qualquer código truthy e furaria o 2FA — regressão a evitar em upgrades.
+- [x] Limite de 5 tentativas de código 2FA por sessão de verificação/setup.
+- [x] Lockout temporário por usuário e limite de falhas por IP no login.
+- [x] Sessões invalidadas após troca de senha (`passwordVersion`) ou
+      desativação (`isActive`).
+- [x] Proxy (`src/proxy.ts`) redireciona visitantes sem cookie de sessão.
+- [x] CSP sem `unsafe-eval` em produção; headers de segurança no
+      `next.config.ts`.
+- [x] Bloqueio de indexação: `robots.txt`, metadata `noindex` e `X-Robots-Tag`.
+- [x] Isolamento por empresa aplicado no servidor (dashboards e CRM).
+
 ## Antes do commit
 
 - [ ] `git status --short` revisado.
