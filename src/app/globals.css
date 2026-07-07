@@ -1927,16 +1927,48 @@ td:nth-child(5) {
 }
 
 .auth-brand-panel {
-  display: grid;
-  justify-items: center;
-  padding: 4px 0 2px;
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 4px;
 }
 
-.auth-logo-lockup {
-  width: min(100%, 292px);
-  height: auto;
-  justify-self: center;
-  filter: drop-shadow(0 14px 30px rgba(0, 58, 120, 0.2));
+.auth-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.auth-brand-mark {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  filter: drop-shadow(0 12px 24px rgba(0, 58, 120, 0.18));
+}
+
+.auth-brand-lockup div {
+  display: grid;
+  gap: 1px;
+  text-align: left;
+}
+
+.auth-brand-lockup strong {
+  color: var(--ink);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.auth-brand-lockup span {
+  color: #4f5661;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  line-height: 1.3;
+  text-transform: uppercase;
 }
 
 .auth-card-wide {
@@ -2003,28 +2035,39 @@ td:nth-child(5) {
   font-size: 15px;
 }
 
-.auth-trust-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.auth-trust-row span {
-  display: inline-flex;
+.auth-trust-bar {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  min-height: 34px;
-  min-width: 0;
+  gap: 11px;
+  min-height: 38px;
   border: 1px solid rgba(0, 102, 204, 0.12);
   border-radius: var(--radius-pill);
   color: #1f426a;
   background: rgba(245, 249, 255, 0.78);
+  padding: 0 14px;
   font-size: 12px;
+}
+
+.auth-trust-bar span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
   white-space: nowrap;
 }
 
-.auth-trust-row svg {
+.auth-trust-bar span + span::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  margin-right: 6px;
+  border-radius: 999px;
+  background: rgba(31, 66, 106, 0.32);
+}
+
+.auth-trust-bar svg {
   flex: 0 0 auto;
   color: var(--blue);
 }
@@ -2305,20 +2348,28 @@ td:nth-child(5) {
     font-size: 28px;
   }
 
-  .auth-logo-lockup {
-    width: min(100%, 250px);
+  .auth-brand-mark {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
   }
 
-  .auth-trust-row {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
+  .auth-brand-lockup strong {
+    font-size: 23px;
   }
 
-  .auth-trust-row span {
-    min-height: 32px;
-    gap: 4px;
-    padding: 0 6px;
+  .auth-brand-lockup span {
+    font-size: 8px;
+  }
+
+  .auth-trust-bar {
+    gap: 7px;
+    padding: 0 10px;
     font-size: 11px;
+  }
+
+  .auth-trust-bar span + span::before {
+    margin-right: 4px;
   }
 
   .mfa-enrollment {
