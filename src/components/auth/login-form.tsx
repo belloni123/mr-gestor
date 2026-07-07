@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { LockKeyhole } from "lucide-react";
+import { Fingerprint, LockKeyhole, ShieldCheck } from "lucide-react";
 
 export function LoginForm() {
   const [error, setError] = useState("");
@@ -37,11 +37,28 @@ export function LoginForm() {
 
   return (
     <form className="auth-card" onSubmit={onSubmit}>
-      <img className="auth-logo-lockup" src="/brand/mr-gestao-logo.svg" alt="MR Gestão" />
+      <div className="auth-brand-panel" aria-label="MR Gestão">
+        <img className="auth-logo-lockup" src="/brand/mr-gestao-logo.svg" alt="MR Gestão" />
+      </div>
+
       <div className="auth-heading">
-        <span>Portal seguro</span>
-        <h1>Bem-vindo de volta</h1>
-        <p>Acesse seu painel de gestão com senha e dupla autenticação.</p>
+        <h1>Entre no seu centro de gestão</h1>
+        <p>Visualize empresas, indicadores e rotinas de controladoria em um ambiente privado.</p>
+      </div>
+
+      <div className="auth-trust-row" aria-label="Recursos de segurança">
+        <span>
+          <ShieldCheck size={14} />
+          2FA
+        </span>
+        <span>
+          <LockKeyhole size={14} />
+          Sessão protegida
+        </span>
+        <span>
+          <Fingerprint size={14} />
+          Acesso privado
+        </span>
       </div>
 
       <label>

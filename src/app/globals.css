@@ -1889,12 +1889,16 @@ td:nth-child(5) {
 
 .auth-card {
   display: grid;
-  gap: 18px;
-  padding: 28px;
-  border-color: rgba(255, 255, 255, 0.36);
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: 0 30px 90px rgba(0, 14, 31, 0.36);
-  backdrop-filter: blur(24px) saturate(142%);
+  gap: 17px;
+  padding: 30px;
+  border-color: rgba(255, 255, 255, 0.52);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.78) 54%, rgba(246, 248, 252, 0.7)),
+    rgba(255, 255, 255, 0.86);
+  box-shadow:
+    0 34px 110px rgba(0, 14, 31, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(28px) saturate(150%);
   animation: auth-card-in 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
@@ -1922,11 +1926,17 @@ td:nth-child(5) {
   animation-delay: 330ms;
 }
 
+.auth-brand-panel {
+  display: grid;
+  justify-items: center;
+  padding: 4px 0 2px;
+}
+
 .auth-logo-lockup {
-  width: min(100%, 260px);
+  width: min(100%, 292px);
   height: auto;
   justify-self: center;
-  filter: drop-shadow(0 10px 24px rgba(0, 58, 120, 0.16));
+  filter: drop-shadow(0 14px 30px rgba(0, 58, 120, 0.2));
 }
 
 .auth-card-wide {
@@ -1950,6 +1960,10 @@ td:nth-child(5) {
   gap: 7px;
 }
 
+.auth-heading {
+  text-align: center;
+}
+
 .auth-heading span,
 .settings-heading span,
 .settings-summary > span {
@@ -1964,6 +1978,12 @@ td:nth-child(5) {
   line-height: 1.05;
 }
 
+.auth-heading h1 {
+  letter-spacing: 0;
+  font-size: 34px;
+  font-weight: 650;
+}
+
 .settings-heading h2,
 .settings-summary h2 {
   margin: 0;
@@ -1976,6 +1996,37 @@ td:nth-child(5) {
   margin: 0;
   color: var(--muted-strong);
   line-height: 1.5;
+}
+
+.auth-heading p {
+  color: #3a3a3c;
+  font-size: 15px;
+}
+
+.auth-trust-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.auth-trust-row span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 34px;
+  min-width: 0;
+  border: 1px solid rgba(0, 102, 204, 0.12);
+  border-radius: var(--radius-pill);
+  color: #1f426a;
+  background: rgba(245, 249, 255, 0.78);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.auth-trust-row svg {
+  flex: 0 0 auto;
+  color: var(--blue);
 }
 
 .auth-card label,
@@ -2252,6 +2303,22 @@ td:nth-child(5) {
   .auth-heading h1,
   .settings-heading h1 {
     font-size: 28px;
+  }
+
+  .auth-logo-lockup {
+    width: min(100%, 250px);
+  }
+
+  .auth-trust-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .auth-trust-row span {
+    min-height: 32px;
+    gap: 4px;
+    padding: 0 6px;
+    font-size: 11px;
   }
 
   .mfa-enrollment {
