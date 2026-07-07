@@ -112,7 +112,6 @@ export async function requireSessionUser() {
   });
 
   if (!freshUser?.isActive || freshUser.passwordVersion !== session.user.passwordVersion) {
-    session.destroy();
     redirect("/login");
   }
 
