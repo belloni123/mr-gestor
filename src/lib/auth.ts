@@ -112,7 +112,7 @@ export async function requireSessionUser() {
   });
 
   if (!freshUser?.isActive || freshUser.passwordVersion !== session.user.passwordVersion) {
-    redirect("/login");
+    redirect("/api/auth/logout?next=/login");
   }
 
   return session.user;
